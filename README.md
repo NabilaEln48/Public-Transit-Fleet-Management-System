@@ -11,7 +11,7 @@
 - Developed servlet logic for:
   - User registration and authentication.
   - Role-based access control (e.g., operator vs. manager).
-  - Secure password hashing using SHA-256.
+  - Secure password.
 - Assisted in drafting the use case for user authentication (FR-01).
 - Contributed to the UML and class diagram for the `User` model.
 
