@@ -1,97 +1,129 @@
-# Public-Transit-Fleet-Management-System-PTFMS-
-
-
-👥 Team Member Roles and Task Distribution
-
-
-🔹 NABILA : Frontend & Authentication
+Public Transit Fleet Management System (PTFMS)
+Team Member Roles and Task Distribution
+Nabila Msiah – Frontend Development & Authentication Module
 Responsibilities:
 
-Design and implement login/register HTML forms
+Designed and implemented login and registration interfaces using JSP (register.jsp, login.jsp).
 
-Implement servlet logic for:
+Developed servlet logic for:
 
-User registration
+User registration and authentication.
 
-Authentication & role-based access
+Role-based access control (e.g., operator vs. manager).
 
-Secure password hashing (SHA-256)
+Secure password hashing using SHA-256.
 
-Help write Use Case for FR-01 (User Auth)
+Assisted in drafting the use case for user authentication (FR-01).
 
-Delivers:
+Contributed to the UML and class diagram for the User model.
+
+Key Deliverables:
 
 register.jsp, login.jsp
 
 AuthServlet.java, UserDAO.java
 
-Part of UML + Class Diagram for User model
+User model representation in UML/Class Diagram
 
-🔹 PURNIMA : Vehicle & GPS Management
+Purnima – Vehicle Management & GPS Logging
 Responsibilities:
 
-CRUD for vehicle registration
+Implemented CRUD operations for vehicle registration.
 
-Implement GPS logging and out-of-service logging
+Developed functionality for GPS tracking and out-of-service logging.
 
-Contribute to:
+Contributed to feature requirements FR-02 (Vehicle Management) and FR-03 (GPS Tracking).
 
-FR-02 (Vehicle Management)
+Designed and implemented the DAO and Servlet layers for vehicle and GPS functionality.
 
-FR-03 (GPS Tracking)
+Contributed to use cases and class diagrams related to vehicle and GPS modules.
 
-DAO + Servlets for vehicle and gps_logs tables
-
-Delivers:
+Key Deliverables:
 
 VehicleServlet.java, GPSLogServlet.java
 
 VehicleDAO.java, GPSLogDAO.java
 
-Write Class Diagram and Use Cases for vehicle and GPS modules
-
-🔹 SIMRAN : Maintenance & Fuel Monitoring
+Prabhsimran Kaur – Maintenance and Fuel Monitoring
 Responsibilities:
 
-Fuel/Energy logging and alert system
+Implemented fuel/energy logging and monitoring features.
 
-Predictive Maintenance (FR-04 and FR-05)
+Developed alert logic for predictive maintenance (based on FR-04 and FR-05).
 
-Create maintenance and fuel DAOs and servlets
+Designed and implemented DAO and Servlet components for maintenance and fuel tracking.
 
-Schedule alert generation logic
+Built logic for detecting excessive fuel use and overdue maintenance tasks.
 
-Delivers:
+Key Deliverables:
 
 FuelServlet.java, MaintenanceServlet.java
 
 FuelDAO.java, MaintenanceDAO.java
 
-Alert logic for excessive fuel or overdue components
+Alert and monitoring logic
 
-🔹 XIE : Reporting, Testing & Final Assembly
+Zhiru Xie – Reporting, Testing, and Documentation
 Responsibilities:
 
-Dashboards for:
+Developed reporting dashboards including:
 
-Maintenance
+Maintenance logs
 
-Operator performance
+Operator performance reports
 
-Fuel cost reports
+Fuel cost summaries
 
-Write JUnit tests for all DAO classes
+Wrote JUnit test cases for all DAO classes.
 
-Compile High-Level Design Doc and slides
+Created the final SQL schema, database ERD, and configuration properties file.
 
-ERD + Final SQL schema + .properties file
-
-Delivers:
+Key Deliverables:
 
 DashboardServlet.java
 
 OperatorPerformanceDAO.java
 
-JUnit test cases
+JUnit test suite
 
-PowerPoint and final PDF/doc packaging
+Final ERD and SQL Schema
+
+High-Level Design Document Contributions
+Nabila Msiah
+
+Application Architecture
+
+Business Architecture – Detailed Design
+
+MVC Implementation Explanation
+
+Use Case Diagram
+
+Final proofreading and structure verification
+
+Prabhsimran Kaur
+
+Deployment Architecture
+
+Sign-off Page Formatting
+
+Zhiru Xie
+
+Document Structure and Setup
+
+Scope and Stakeholders
+
+Initial Design and Project View
+
+Formatting of Tables and Table of Figures
+
+Purnima
+
+Data Architecture (ERD, Logical/Physical Models)
+
+Security Architecture
+
+Manual and Automated (JUnit) Testing
+
+Final Presentation and Packaging
+All members collaborated on preparing the final project presentation slides and exporting the documentation in PDF/Word format for submission.
