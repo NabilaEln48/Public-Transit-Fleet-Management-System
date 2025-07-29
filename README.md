@@ -38,6 +38,8 @@ register.jsp, login.jsp
 
 AuthServlet.java, UserDAO.java
 
+Added also `ManagerDashboard.jsp`, `OperatorDashboard.jsp`
+
 Part of UML + Class Diagram for User model
 
 
