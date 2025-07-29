@@ -20,6 +20,26 @@ All implementation is handled within a dedicated feature branch: `feature/-Nabil
 
 The following tasks were assigned and implemented as part of my contribution to the project:
 
+Design and implement login/register HTML forms
+
+Implement servlet logic for:
+
+User registration
+
+Authentication & role-based access
+
+Secure password hashing (SHA-256)
+
+Help write Use Case for FR-01 (User Auth)
+
+Delivers:
+
+register.jsp, login.jsp
+
+AuthServlet.java, UserDAO.java
+
+Part of UML + Class Diagram for User model
+
 
 
 ---
