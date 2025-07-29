@@ -18,6 +18,7 @@
 **Key Deliverables:**
 - `register.jsp`, `login.jsp`
 - `AuthServlet.java`, `UserDAO.java`
+- Added also `ManagerDashboard.jsp`, `OperatorDashboard.jsp`
 - User model representation in UML/Class Diagram
 
 ---
