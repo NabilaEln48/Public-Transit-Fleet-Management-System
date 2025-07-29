@@ -97,4 +97,4 @@
 ---
 
 ## Final Presentation and Packaging
-All members collaborated on preparing the final project presentation slides and exporting the documentation in PDF/Word format for submission.
+All members collaborated on preparing the final project presentation slides and exporting the documentation in PDF/Power Point format for submission.
