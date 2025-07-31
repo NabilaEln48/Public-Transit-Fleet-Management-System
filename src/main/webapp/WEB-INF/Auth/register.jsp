@@ -3,7 +3,7 @@
     Author       : Nabila Msiah 041146732
     Course       : CST8288 - Group Project - Authentication Module (Nabila Msiah Part)
     Description  : JSP form for user registration. Captures user details such as name, email,
-                   password, and role. Submits data to the AuthServlet for processing.
+                   password, and user type. Submits data to the AuthServlet for processing.
 -->
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,7 @@
         <label>Password:</label><br>
         <input type="password" name="password" required><br><br>
 
-        <!-- Role selection dropdown -->
+        <!-- Role selection (must match parameter name "role" in AuthServlet) -->
         <label>Role:</label><br>
         <select name="role" required>
             <option value="MANAGER">Manager</option>
@@ -43,12 +43,19 @@
     <br>
     <a href="login.jsp">Already have an account? Login here</a>
 
-    <!-- Display message from servlet (e.g., success/failure) -->
+    <!-- Display messages from servlet -->
     <%
         String msg = (String) request.getAttribute("msg");
         if (msg != null) {
     %>
         <p style="color:red;"><%= msg %></p>
+    <%
+        }
+
+        String success = (String) request.getAttribute("success");
+        if (success != null) {
+    %>
+        <p style="color:green;"><%= success %></p>
     <%
         }
     %>

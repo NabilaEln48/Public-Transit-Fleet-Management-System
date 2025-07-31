@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Author : Nabila Msiah 041146732
-    Course        : CST8288 - Group Project - Authentication Module (Nabila Msiah Part)
-    Description   : This is the Maven POM file for the web application.
-                    It includes dependencies for Servlet, MySQL JDBC Driver,
-                    and JSTL. The project is packaged as a WAR.
+    Author       : Nabila Msiah 041146732
+    Course       : CST8288 - Group Project - Authentication Module (Nabila Msiah Part)
+    Description  : This is the Maven POM file for the web application.
+                   It includes dependencies for Servlet, MySQL JDBC Driver,
+                   and JSTL. The project is packaged as a WAR.
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -17,7 +17,7 @@
     <groupId>com.group.project.nabila.msiah</groupId>
     <artifactId>Group.Project.Nabila.Msiah</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging> <!-- Use WAR for web applications -->
+    <packaging>war</packaging> <!-- WAR packaging for web applications -->
 
     <properties>
         <!-- Java version compatibility -->
@@ -27,7 +27,7 @@
     </properties>
 
     <dependencies>
-        <!-- Servlet API -->
+        <!-- Servlet API (provided by the container like Tomcat) -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -35,14 +35,14 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- MySQL JDBC Driver for database connectivity -->
+        <!-- MySQL JDBC Driver -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
 
-        <!-- JSTL support for JSP pages -->
+        <!-- JSTL for JSP Expression Language and core tags -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -51,7 +51,7 @@
     </dependencies>
 
     <build>
-        <!-- Name of the final WAR file -->
         <finalName>Group.Project.Nabila.Msiah</finalName>
     </build>
+
 </project>
