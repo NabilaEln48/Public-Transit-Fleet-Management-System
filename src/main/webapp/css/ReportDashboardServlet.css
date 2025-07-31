@@ -1,0 +1,16 @@
+.buttons {
+    display:flex;
+    width: 300px;
+    flex-direction: column;
+    gap:10px;
+}
+
+.button button {
+    width: 250px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+body {
+    background-color: gainsboro;
+}

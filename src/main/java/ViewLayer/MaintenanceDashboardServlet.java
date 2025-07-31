@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 61963
  */
-public class ReportDashboardServlet extends HttpServlet{
+public class MaintenanceDashboardServlet extends HttpServlet{
     /** Default constructor without parameters. */
-    public ReportDashboardServlet(){}
+    public MaintenanceDashboardServlet(){}
     
     /**Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
     * @param request servlet request
@@ -32,20 +32,11 @@ public class ReportDashboardServlet extends HttpServlet{
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Report Dashboard</title>");   
-            out.println("<link rel=\"stylesheet\" href=\"css/ReportDashboardServlet.css\" />");
+            out.println("<title>Maintenance Dashboard</title>");   
             out.println("</head>");
             out.println("<body>");
             // content
-            out.println("<h1>Report Dashboard</h1>");
-            out.println("<form method=\"post\" action=\"FrontendController\">");
-            out.println("<div class=\"buttons\">");
-            out.println("<button type=\"submit\" name=\"action\" value=\"MaintenanceDashboard\">Maintenance Dashboard</button>");
-            out.println("<button type=\"submit\" name=\"action\" value=\"PerformanceDashboard\">Performance Dashboard</button>");
-            out.println("<button type=\"submit\" name=\"action\" value=\"CostReport\">Cost Reports</button>");
-            out.println("</div>");
-            out.println("</form>");
-
+            out.println("<h1>Maintenance Dashboard</h1>");
             //content
             out.println("</body>");
             out.println("</html>");
@@ -91,4 +82,3 @@ public class ReportDashboardServlet extends HttpServlet{
         return "Short description";
     }// </editor-fold>
 }
-
