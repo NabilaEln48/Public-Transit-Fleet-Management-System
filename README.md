@@ -33,9 +33,10 @@
 - Contributed to use cases and class diagrams related to vehicle and GPS modules.
 
 **Key Deliverables:**
-- `VehicleServlet.java`, `GPSLogServlet.java`
-- `VehicleDAO.java`, `GPSLogDAO.java`
-- 'StationDAO.java' , 'StationDTO.java'
+- `VehicleServlet.java`, `GPSLogServlet.java`, `GPSTrackingservlet`
+- `VehicleDAO.java`, `VehicleDAOImpl.java` ,`GPSLogDAO.java` , `GPSLogDAOImpl.java`
+- `StationDAO.java` , `StationDAOImpl.java` ,`StationDTO.java`
+- `GPSTrackingDTO.java`, `GPSTrackingDAO.java` , `GPSTrackingDAOImpl.java`
 
 ---
 
