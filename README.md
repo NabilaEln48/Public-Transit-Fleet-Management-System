@@ -6,20 +6,50 @@
 
 ### **Nabila Msiah – Frontend Development & Authentication Module**
 
-**Responsibilities:**
-- Designed and implemented login and registration interfaces using JSP (register.jsp, login.jsp).
-- Developed servlet logic for:
-  - User registration and authentication.
-  - Role-based access control (e.g., operator vs. manager).
-  - Secure password.
-- Assisted in drafting the use case for user authentication (FR-01).
-- Contributed to the UML and class diagram for the `User` model.
+Nabila Msiah – Frontend Development & Authentication Module
+Responsibilities:
 
-**Key Deliverables:**
-- `register.jsp`, `login.jsp`
-- `AuthServlet.java`, `UserDAO.java`
-- Added also `ManagerDashboard.jsp`, `OperatorDashboard.jsp`
-- User model representation in UML/Class Diagram
+Designed and implemented secure login and registration interfaces using JSP and JSTL:
+
+WEB-INF/Auth/register.jsp for user registration.
+
+WEB-INF/Auth/login.jsp for user login.
+
+Developed centralized routing logic using the Front Controller design pattern in FrontControllerServlet.java:
+
+Handled all user actions via action parameters (e.g., action=login, action=register, etc.).
+
+Managed role-based access control and secure page forwarding.
+
+Implemented user authentication and registration through UserDAO and UserDAOImpl using JDBC.
+
+Applied SHA-256 hashing for secure password storage.
+
+Built public entry points for the app using index.html and JSP redirectors (e.g., register.jsp → controller).
+
+Assisted in drafting functional requirement FR-01 (User Authentication).
+
+Contributed to the UML and class diagrams for the User module, DAO, DTO, and servlet/controller layers.
+
+Key Deliverables:
+
+Frontend Views:
+
+index.html, register.jsp (redirector), WEB-INF/Auth/register.jsp, WEB-INF/Auth/login.jsp
+
+Controller & Backend:
+
+FrontControllerServlet.java, UserDAO.java, UserDAOImpl.java, UserDTO.java, DataSource.java
+
+Dashboards:
+
+Dashboard/manager.jsp, Dashboard/operator.jsp
+
+Design Diagrams:
+
+UML and class diagrams showing User, DAO, DTO, and controller interactions
+
+
 
 ---
 
