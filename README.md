@@ -16,7 +16,7 @@ All implementation is handled within a dedicated feature branch: `feature/-Nabil
 
 ---
 
-### Responsibilities
+**Responsibilities:**
 
 The following tasks were assigned and implemented as part of my contribution to the project:
 
@@ -32,16 +32,10 @@ Secure password hashing (SHA-256)
 
 Help write Use Case for FR-01 (User Auth)
 
-Delivers:
-
-register.jsp, login.jsp
-
-AuthServlet.java, UserDAO.java
-
-Added also `ManagerDashboard.jsp`, `OperatorDashboard.jsp`
-
-Part of UML + Class Diagram for User model
-
-
+**Key Deliverables:**
+- `AuthServlet.java`, `LoginServlet.java`, `FrontControllerservlet.java`
+- `index.html`, `register.jsp` ,`login.jsp` , `managerdashboard.jsp` , `Operatordashboard.jsp`
+- `UserBusinessLogic.java` , `UserDAO.java` ,`UserDAOImpl.java` , `UserDTO.java`
+- `DataSource.java`, `Web.xml` , `GPSTrackingDAOImpl.java`
 
 ---
