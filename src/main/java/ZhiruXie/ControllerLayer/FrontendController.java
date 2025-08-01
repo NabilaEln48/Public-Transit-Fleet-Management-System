@@ -2,9 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ControllerLayer;
+package ZhiruXie.ControllerLayer;
 
+import ZhiruXie.BusinessLayer.MaintenanceScheduleBusinessLogic;
+import ZhiruXie.DTO.MaintenanceScheduleDTO;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FrontendController extends HttpServlet{
     /** The business logic instance that are used for calling detailed logic from the DAO implementation class. */
-//    private AuthorsBusinessLogic businessLogic = new AuthorsBusinessLogic();
+    private MaintenanceScheduleBusinessLogic businessLogic = new MaintenanceScheduleBusinessLogic();
     /** Target url for new web page. */
     private String targetUrl;
     
@@ -42,7 +45,7 @@ public class FrontendController extends HttpServlet{
             return;
         }
         
-        dispatcher = request.getRequestDispatcher(targetUrl);       
+        dispatcher = request.getRequestDispatcher("/" + targetUrl);       
         dispatcher.forward(request, response);
     }
     
@@ -58,6 +61,17 @@ public class FrontendController extends HttpServlet{
     private boolean prepareRequest(HttpServletRequest request, HttpServletResponse response, String action) throws IOException, NullPointerException{
         switch (action){
             case "ReportDashboard" -> {
+                
+            }
+            case "MaintenanceDashboard" -> {
+                int userId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
+                List<MaintenanceScheduleDTO> schedules = businessLogic.getAllMaintenaceSchedules(userId);
+                request.setAttribute("schedules", schedules);
+            }
+            case "PerformanceDashboard" -> {
+                
+            }
+            case "CostReports" -> {
                 
             }
         }

@@ -63,7 +63,7 @@ CREATE TABLE service_logs (
     log_type ENUM('Break', 'OutOfService') NOT NULL,
     operator_ref INT NOT NULL,
     FOREIGN KEY (vehicle_ref) REFERENCES transit_vehicles(id),
-    FOREIGN KEY (operator_ref) REFERENCES user_accounts(id)
+    FOREIGN KEY (operator_ref) REFERENCES user(id)
 );
 
 -- Fuel and Energy Monitoring Table (FR-04)
@@ -106,11 +106,11 @@ CREATE TABLE maintenance_schedule (
     vehicle_ref VARCHAR(50) NOT NULL,
     task_description TEXT NOT NULL,
     planned_date DATE NOT NULL,
-    progress_status ENUM('Scheduled', 'In Progress', 'Completed') DEFAULT 'Scheduled',
+    progress_status ENUM('Scheduled', 'InProgress', 'Completed') DEFAULT 'Scheduled',
     assigned_technician INT,
     FOREIGN KEY (component_ref) REFERENCES system_components(id),
     FOREIGN KEY (vehicle_ref) REFERENCES transit_vehicles(id),
-    FOREIGN KEY (assigned_technician) REFERENCES user_accounts(id)
+    FOREIGN KEY (assigned_technician) REFERENCES user(id)
 );
 
 -- Analytics and Summary Reports (FR-06)
@@ -138,12 +138,12 @@ CREATE TABLE trip_records (
     fuel_spent DOUBLE,
     passengers INT,
     trip_day DATE NOT NULL,
-    FOREIGN KEY (operator_ref) REFERENCES user_accounts(id),
+    FOREIGN KEY (operator_ref) REFERENCES user(id),
     FOREIGN KEY (vehicle_ref) REFERENCES transit_vehicles(id)
 );
 
 -- Sample Users
-INSERT INTO user_accounts (name, email, password, role) VALUES
+INSERT INTO user (name, email, password, role) VALUES
 ('John Doe', 'john.doe@transit.com', 'pass123', 'Manager'),
 ('Jane Smith', 'jane.smith@transit.com', 'pass456', 'Operator'),
 ('Alice Brown', 'alice.brown@transit.com', 'pass789', 'Operator');
@@ -197,3 +197,17 @@ INSERT INTO maintenance_schedule (component_ref, vehicle_ref, task_description, 
 INSERT INTO analytics_reports (report_category, report_payload, created_at) VALUES
 ('Fuel Usage', 'BUS001: 10.5L, RAIL001: 50kWh', '2025-03-27 11:00:00'),
 ('Maintenance Cost', 'Estimated cost for BUS001: $500', '2025-03-27 12:00:00');
+
+
+-- Customized
+-- Maintenance Task 1: BUS001 - Brakes (Completed)
+INSERT INTO maintenance_schedule (component_ref, vehicle_ref, task_description, planned_date, progress_status, assigned_technician)
+VALUES (1, 'BUS001', 'Replace brake pads and perform brake system check', '2025-07-31', 'Completed', 1);
+
+-- Maintenance Task 2: RAIL001 - Pantograph (In Progress)
+INSERT INTO maintenance_schedule (component_ref, vehicle_ref, task_description, planned_date, progress_status, assigned_technician)
+VALUES (2, 'RAIL001', 'Clean and inspect pantograph contacts', '2025-08-01', 'In Progress', 1);
+
+-- Maintenance Task 3: TRAIN001 - Engine (Scheduled)
+INSERT INTO maintenance_schedule (component_ref, vehicle_ref, task_description, planned_date, progress_status, assigned_technician)
+VALUES (3, 'TRAIN001', 'Run diagnostic and tune engine performance', '2025-08-02', 'Scheduled', 1);
