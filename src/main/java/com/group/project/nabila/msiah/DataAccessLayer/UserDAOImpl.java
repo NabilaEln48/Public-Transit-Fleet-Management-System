@@ -11,50 +11,63 @@ import com.group.project.nabila.msiah.transferobject.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserDAOImpl implements UserDAO {
 
-    private Connection conn;
+    private final Connection conn;
 
     public UserDAOImpl(Connection conn) {
         this.conn = conn;
     }
 
+    /**
+     * Inserts a new user into the users table.
+     *
+     * @param user UserDTO object containing user details
+     * @return true if insertion is successful; false otherwise
+     */
     @Override
     public boolean insertUser(UserDTO user) {
-        try {
-            String sql = "INSERT INTO users (name, email, password, user_type) VALUES (?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
+        String sql = "INSERT INTO user (name, email, password, role) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
             stmt.setString(4, user.getUserType());
             return stmt.executeUpdate() > 0;
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.err.println("Error in insertUser (UserDAOImpl):");
             e.printStackTrace();
             return false;
         }
     }
 
+    /**
+     * Authenticates a user by email and hashed password.
+     *
+     * @param email          the user's email
+     * @param hashedPassword the hashed password
+     * @return UserDTO if credentials match; null otherwise
+     */
     @Override
     public UserDTO authenticate(String email, String hashedPassword) {
-        try {
-            String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             stmt.setString(2, hashedPassword);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return new UserDTO(
-                        rs.getInt("user_id"),
-                        rs.getString("name"),
-                        rs.getString("email"),
-                        rs.getString("password"),
-                        rs.getString("user_type"));
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return new UserDTO(
+                            rs.getInt("user_id"),
+                            rs.getString("name"),
+                            rs.getString("email"),
+                            rs.getString("password"),
+                            rs.getString("user_type"));
+                }
             }
-
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.err.println("Error in authenticate (UserDAOImpl):");
             e.printStackTrace();
         }
         return null;

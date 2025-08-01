@@ -43,7 +43,7 @@ public class AuthServlet extends HttpServlet {
                 if (name == null || email == null || password == null || role == null ||
                         name.trim().isEmpty() || email.trim().isEmpty() || password.trim().isEmpty()) {
                     request.setAttribute("msg", "All fields are required.");
-                    request.getRequestDispatcher("/WEB-INF/Auth/register.jsp").forward(request, response);
+                    request.getRequestDispatcher("/register.jsp").forward(request, response);
                     return;
                 }
 
@@ -53,11 +53,11 @@ public class AuthServlet extends HttpServlet {
                 boolean success = dao.insertUser(user);
 
                 if (success) {
-                    request.setAttribute("msg", "Registration successful. Please login.");
-                    request.getRequestDispatcher("/WEB-INF/Auth/login.jsp").forward(request, response);
+                    request.setAttribute("success", "Registration successful. You may now log in.");
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
                 } else {
                     request.setAttribute("msg", "Registration failed. Email might already be in use.");
-                    request.getRequestDispatcher("/WEB-INF/Auth/register.jsp").forward(request, response);
+                    request.getRequestDispatcher("/register.jsp").forward(request, response);
                 }
             }
 
@@ -68,7 +68,7 @@ public class AuthServlet extends HttpServlet {
 
                 if (email == null || password == null || email.trim().isEmpty() || password.trim().isEmpty()) {
                     request.setAttribute("msg", "Email and password are required.");
-                    request.getRequestDispatcher("/WEB-INF/Auth/login.jsp").forward(request, response);
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
                     return;
                 }
 
@@ -89,20 +89,22 @@ public class AuthServlet extends HttpServlet {
                     }
                 } else {
                     request.setAttribute("msg", "Invalid email or password.");
-                    request.getRequestDispatcher("/WEB-INF/Auth/login.jsp").forward(request, response);
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
                 }
+            }
+
+            // ---------- Show Register Form ----------
+            else if ("showRegister".equalsIgnoreCase(action)) {
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("msg", "Internal error occurred. Please try again later.");
-            request.getRequestDispatcher("/WEB-INF/Auth/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 
-    /**
-     * Utility method to hash passwords using SHA-256.
-     */
     private String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

@@ -5,11 +5,9 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-    // Get the user's role from the session
-    String role = (String) session.getAttribute("role");
+    String role = (String) session.getAttribute("userType");
 
-    // Redirect to login if not operator or manager
-    if (role == null || (!role.equals("operator") && !role.equals("manager"))) {
+    if (role == null || (!role.equalsIgnoreCase("operator") && !role.equalsIgnoreCase("manager"))) {
         response.sendRedirect("login.jsp");
         return;
     }
@@ -42,9 +40,9 @@
     </style>
 </head>
 <body>
-    <h1>Welcome, <%= role.substring(0, 1).toUpperCase() + role.substring(1) %>!</h1>
+    <h1>Welcome, <%= role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() %>!</h1>
 
-    <% if ("operator".equals(role)) { %>
+    <% if ("operator".equalsIgnoreCase(role)) { %>
         <p>You have access to operator functionalities:</p>
         <ul>
             <li><a href="logGPS.jsp">Log GPS Data</a></li>
@@ -52,7 +50,7 @@
             <li><a href="logFuelConsumption.jsp">Log Fuel Consumption</a></li>
             <li><a href="viewReports.jsp">View Reports</a></li>
         </ul>
-    <% } else if ("manager".equals(role)) { %>
+    <% } else if ("manager".equalsIgnoreCase(role)) { %>
         <p>You are logged in as a Manager. You may view or supervise operator actions:</p>
         <ul>
             <li><a href="viewReports.jsp">View Reports</a></li>
@@ -62,6 +60,6 @@
         </ul>
     <% } %>
 
-    <br><a href="logout.jsp">Logout</a>
+    <br><a href="${pageContext.request.contextPath}/logout">Logout</a>
 </body>
 </html>

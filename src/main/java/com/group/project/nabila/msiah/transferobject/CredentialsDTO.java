@@ -1,16 +1,17 @@
 /*
     Author       : Nabila Msiah 041146732
     Course       : CST8288 - Group Project - Authentication Module (Nabila Msiah Part)
-    Description  : DTO for holding database authentication credentials.
+    Description  : DTO for holding authentication credentials, such as username and password.
 */
 
 package com.group.project.nabila.msiah.transferobject;
 
 /**
  * A Data Transfer Object used to encapsulate credentials
- * required for authenticating or accessing secure resources (e.g., database).
+ * (e.g., for authenticating users or DB connection).
  */
 public class CredentialsDTO {
+
     private String username;
     private String password;
 

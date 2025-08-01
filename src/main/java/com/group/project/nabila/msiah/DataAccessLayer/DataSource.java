@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 /**
  * DataSource is a singleton that manages a single JDBC connection to ptfms_db.
+ * In production, a connection pool like HikariCP or Apache DBCP should be used.
  */
 public class DataSource {
 
@@ -31,7 +32,8 @@ public class DataSource {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace(); // Replace with logger in production
+            System.err.println("Failed to initialize database connection:");
+            e.printStackTrace();
         }
     }
 
@@ -48,11 +50,20 @@ public class DataSource {
     }
 
     /**
-     * Returns the shared JDBC connection.
+     * Returns a valid, open JDBC connection.
      *
      * @return active database connection
      */
     public Connection getConnection() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                // Attempt to reconnect if the connection was closed
+                connection = DriverManager.getConnection(url, username, password);
+            }
+        } catch (SQLException e) {
+            System.err.println("Failed to reconnect to database:");
+            e.printStackTrace();
+        }
         return connection;
     }
 }

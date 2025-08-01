@@ -6,10 +6,12 @@
 
 package com.group.project.nabila.msiah.transferobject;
 
+import java.io.Serializable;
+
 /**
- * UserDTO represents the user's session and identity details.
+ * UserDTO represents the user's identity and session-related data.
  */
-public class UserDTO {
+public class UserDTO implements Serializable {
     private int userId;
     private String name;
     private String email;
@@ -27,7 +29,6 @@ public class UserDTO {
         this.userType = userType;
     }
 
-    // Constructor without userId (used during registration)
     public UserDTO(String name, String email, String password, String userType) {
         this.name = name;
         this.email = email;
@@ -35,7 +36,6 @@ public class UserDTO {
         this.userType = userType;
     }
 
-    // Getters and Setters
     public int getUserId() {
         return userId;
     }
@@ -74,5 +74,15 @@ public class UserDTO {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", userType='" + userType + '\'' +
+                '}';
     }
 }

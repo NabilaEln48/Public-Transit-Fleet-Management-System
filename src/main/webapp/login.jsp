@@ -91,23 +91,29 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        .register-link a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 <div class="login-container">
     <h1>Login</h1>
 
-    <!-- Error or general message from servlet -->
     <c:if test="${not empty msg}">
         <div class="error">${msg}</div>
     </c:if>
 
-    <!-- Optional success message (e.g., after registration) -->
     <c:if test="${not empty success}">
         <div class="success">${success}</div>
     </c:if>
 
-    <!-- Login form sends action=login to /auth servlet -->
     <form action="${pageContext.request.contextPath}/auth" method="post">
         <input type="hidden" name="action" value="login">
 
@@ -125,7 +131,9 @@
     </form>
 
     <div class="register-link">
-        <p>Don't have an account? <a href="/src/main/webapp/WEB-INF/Auth/register.jsp">Register</a></p>
+        <p>Don't have an account? 
+            <a href="${pageContext.request.contextPath}/controller?action=showRegister">Register</a>
+        </p>
     </div>
 </div>
 </body>
