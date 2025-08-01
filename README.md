@@ -6,48 +6,27 @@
 
 ### **Nabila Msiah – Frontend Development & Authentication Module**
 
-Nabila Msiah – Frontend Development & Authentication Module
-Responsibilities:
+**Responsibilities:**
 
-Designed and implemented secure login and registration interfaces using JSP and JSTL:
+The following tasks were assigned and implemented as part of my contribution to the project:
 
-WEB-INF/Auth/register.jsp for user registration.
+Design and implement login/register HTML forms
 
-WEB-INF/Auth/login.jsp for user login.
+Implement servlet logic for:
 
-Developed centralized routing logic using the Front Controller design pattern in FrontControllerServlet.java:
+User registration
 
-Handled all user actions via action parameters (e.g., action=login, action=register, etc.).
+Authentication & role-based access
 
-Managed role-based access control and secure page forwarding.
+Secure password hashing (SHA-256)
 
-Implemented user authentication and registration through UserDAO and UserDAOImpl using JDBC.
+Help write Use Case for FR-01 (User Auth)
 
-Applied SHA-256 hashing for secure password storage.
-
-Built public entry points for the app using index.html and JSP redirectors (e.g., register.jsp → controller).
-
-Assisted in drafting functional requirement FR-01 (User Authentication).
-
-Contributed to the UML and class diagrams for the User module, DAO, DTO, and servlet/controller layers.
-
-Key Deliverables:
-
-Frontend Views:
-
-index.html, register.jsp (redirector), WEB-INF/Auth/register.jsp, WEB-INF/Auth/login.jsp
-
-Controller & Backend:
-
-FrontControllerServlet.java, UserDAO.java, UserDAOImpl.java, UserDTO.java, DataSource.java
-
-Dashboards:
-
-Dashboard/manager.jsp, Dashboard/operator.jsp
-
-Design Diagrams:
-
-UML and class diagrams showing User, DAO, DTO, and controller interactions
+**Key Deliverables:**
+- `AuthServlet.java`, `LoginServlet.java`, `FrontControllerservlet.java`
+- `index.html`, `register.jsp` ,`login.jsp` , `managerdashboard.jsp` , `Operatordashboard.jsp`
+- `UserBusinessLogic.java` , `UserDAO.java` ,`UserDAOImpl.java` , `UserDTO.java`
+- `DataSource.java`, `Web.xml` , `GPSTrackingDAOImpl.java`
 
 
 
