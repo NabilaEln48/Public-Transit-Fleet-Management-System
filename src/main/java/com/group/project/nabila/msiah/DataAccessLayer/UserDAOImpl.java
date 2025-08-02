@@ -22,7 +22,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     /**
-     * Inserts a new user into the users table.
+     * Inserts a new user into the user table.
      *
      * @param user UserDTO object containing user details
      * @return true if insertion is successful; false otherwise
@@ -52,18 +52,18 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public UserDTO authenticate(String email, String hashedPassword) {
-        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             stmt.setString(2, hashedPassword);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new UserDTO(
-                            rs.getInt("user_id"),
+                            rs.getInt("id"),
                             rs.getString("name"),
                             rs.getString("email"),
                             rs.getString("password"),
-                            rs.getString("user_type"));
+                            rs.getString("role"));
                 }
             }
         } catch (SQLException e) {
