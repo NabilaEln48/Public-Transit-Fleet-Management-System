@@ -6,10 +6,10 @@
                    in session upon successful login.
 */
 
-package com.group.project.nabila.msiah.ViewLayer;
+package ViewLayer;
 
-import com.group.project.nabila.msiah.BusinessLogicLayer.UserBusinessLogic;
-import com.group.project.nabila.msiah.transferobject.UserDTO;
+import BusinessLogicLayer.UserBusinessLogic;
+import Transferobject.UserDTO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
             if (session != null) {
                 session.invalidate();
             }
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
         } else {
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
@@ -65,23 +65,28 @@ public class LoginServlet extends HttpServlet {
             UserDTO user = userLogic.authenticateUser(email, hashedPassword);
 
             if (user != null) {
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(true);
                 session.setAttribute("user", user);
                 session.setAttribute("userId", user.getUserId());
                 session.setAttribute("userName", user.getName());
                 session.setAttribute("userType", user.getUserType());
 
+                String redirectUrl = request.getContextPath();
+
                 switch (user.getUserType().toLowerCase()) {
                     case "manager":
-                        response.sendRedirect(request.getContextPath() + "/Dashboard/manager.jsp");
+                        redirectUrl += "/manager.jsp";
                         break;
                     case "operator":
-                        response.sendRedirect(request.getContextPath() + "/Dashboard/operator.jsp");
+                        redirectUrl += "/operator.jsp";
                         break;
                     default:
-                        response.sendRedirect(request.getContextPath() + "/login");
+                        redirectUrl += "/login.jsp";
                         break;
                 }
+
+                logger.info("Redirecting to: " + redirectUrl);
+                response.sendRedirect(redirectUrl);
 
             } else {
                 request.setAttribute("error", "Invalid email or password.");

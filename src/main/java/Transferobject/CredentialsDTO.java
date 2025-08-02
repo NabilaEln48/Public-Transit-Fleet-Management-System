@@ -4,7 +4,7 @@
     Description  : DTO for holding authentication credentials, such as username and password.
 */
 
-package com.group.project.nabila.msiah.transferobject;
+package Transferobject;
 
 /**
  * A Data Transfer Object used to encapsulate credentials

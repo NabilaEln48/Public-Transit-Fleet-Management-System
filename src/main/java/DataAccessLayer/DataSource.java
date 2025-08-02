@@ -5,7 +5,7 @@
                    to the ptfms_db schema for authentication and user management.
 */
 
-package com.group.project.nabila.msiah.DataAccessLayer;
+package DataAccessLayer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

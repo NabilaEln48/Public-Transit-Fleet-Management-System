@@ -6,12 +6,12 @@
                    registration requests via the UserDAOImpl, and routes users based on their roles.
 */
 
-package com.group.project.nabila.msiah.ViewLayer;
+package ViewLayer;
 
-import com.group.project.nabila.msiah.transferobject.UserDTO;
-import com.group.project.nabila.msiah.DataAccessLayer.UserDAO;
-import com.group.project.nabila.msiah.DataAccessLayer.UserDAOImpl;
-import com.group.project.nabila.msiah.DataAccessLayer.DataSource;
+import Transferobject.UserDTO;
+import DataAccessLayer.UserDAO;
+import DataAccessLayer.UserDAOImpl;
+import DataAccessLayer.DataSource;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -83,9 +83,9 @@ public class AuthServlet extends HttpServlet {
                     session.setAttribute("userType", user.getUserType());
 
                     if ("MANAGER".equalsIgnoreCase(user.getUserType())) {
-                        response.sendRedirect("Dashboard/manager.jsp");
+                        response.sendRedirect("/manager.jsp");
                     } else {
-                        response.sendRedirect("Dashboard/operator.jsp");
+                        response.sendRedirect("/operator.jsp");
                     }
                 } else {
                     request.setAttribute("msg", "Invalid email or password.");

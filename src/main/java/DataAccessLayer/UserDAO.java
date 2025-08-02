@@ -4,9 +4,9 @@
     Description  : DAO Interface for user-related DB operations.
 */
 
-package com.group.project.nabila.msiah.DataAccessLayer;
+package DataAccessLayer;
 
-import com.group.project.nabila.msiah.transferobject.UserDTO;
+import Transferobject.UserDTO;
 
 /**
  * UserDAO defines contract for user authentication and registration operations.
