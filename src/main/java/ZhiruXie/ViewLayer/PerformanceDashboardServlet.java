@@ -4,8 +4,11 @@
  */
 package ZhiruXie.ViewLayer;
 
+import ZhiruXie.DTO.PerformanceDTO;
+import ZhiruXie.Utility.TimestampFormatter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,14 +32,37 @@ public class PerformanceDashboardServlet extends HttpServlet{
         throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {   
+            List<PerformanceDTO> records = (List<PerformanceDTO>)request.getAttribute("performanceRecords");
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Performance Dashboard</title>");   
+            out.println("<link rel='stylesheet' type='text/css' href='css/PerformanceDashboard.css'>");
             out.println("</head>");
             out.println("<body>");
             // content
             out.println("<h1>Performance Dashboard</h1>");
+            if (records != null && !records.isEmpty()) {
+                for (PerformanceDTO record : records) {
+                    out.println("<div class='card'>");
+                    out.println("<h2>Trip #" + record.getId() + "</h2>");
+                    out.println("<p><span class='label'>Operator ID:</span> " + record.getOperatorId() + "</p>");
+                    out.println("<p><span class='label'>Vehicle ID:</span> " + record.getVehicleId() + "</p>");
+                    out.println("<p><span class='label'>Route Name:</span> " + record.getRouteName() + "</p>");
+                    out.println("<p><span class='label'>Scheduled Start:</span> " + TimestampFormatter.format(record.getScheduledStartTime()) + "</p>");
+                    out.println("<p><span class='label'>Start Time:</span> " + TimestampFormatter.format(record.getStartTime()) + "</p>");
+                    out.println("<p><span class='label'>End Time:</span> " + TimestampFormatter.format(record.getEndTime()) + "</p>");
+                    out.println("<p><span class='label'>On Time:</span> " + (record.getOnTime() ? "Yes" : "No") + "</p>");
+                    out.println("<p><span class='label'>Distance:</span> " + record.getDistance() + " km</p>");
+                    out.println("<p><span class='label'>Used Time:</span> " + record.getUsedTime() + " min</p>");
+                    out.println("<p><span class='label'>Idle Time:</span> " + record.getIdleTime() + " min</p>");
+                    out.println("<p><span class='label'>Fuel Spent:</span> " + record.getFuelSpent() + " L</p>");
+                    out.println("<p><span class='label'>Passengers:</span> " + record.getPassengerNumber() + "</p>");
+                    out.println("</div>");
+                }
+            } else {
+                out.println("<p>No performance data available.</p>");
+            }
             //content
             out.println("</body>");
             out.println("</html>");

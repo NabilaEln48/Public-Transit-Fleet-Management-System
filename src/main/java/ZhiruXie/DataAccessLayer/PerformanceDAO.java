@@ -1,23 +1,23 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ZhiruXie.DataAccessLayer;
 
-import ZhiruXie.DTO.MaintenanceScheduleDTO;
+import ZhiruXie.DTO.PerformanceDTO;
 import java.util.List;
 
 /**
  *
  * @author 61963
  */
-public interface MaintenanceScheduleDAO {
+public interface PerformanceDAO {
     /**
      * Get all schedules
      * @param userId
      * @return
      */
-    List<MaintenanceScheduleDTO> getAll(int userId);
+    List<PerformanceDTO> getAll(int userId);
     
     /**
      * Get single schedule
@@ -25,7 +25,7 @@ public interface MaintenanceScheduleDAO {
      * @param scheduleId
      * @return
      */
-    MaintenanceScheduleDTO getSingleById(int userId, int scheduleId);
+    PerformanceDTO getSingleById(int userId, int scheduleId);
     
     /**
      * Insert
@@ -34,7 +34,7 @@ public interface MaintenanceScheduleDAO {
      * @param schedule
      * @return
      */
-    boolean add(int userId, MaintenanceScheduleDTO schedule);
+    boolean add(int userId, PerformanceDTO performance);
     
     /**
      * Update
@@ -43,7 +43,7 @@ public interface MaintenanceScheduleDAO {
      * @param schedule
      * @return
      */
-    boolean update(int userId, MaintenanceScheduleDTO schedule);
+    boolean update(int userId, PerformanceDTO performance);
     
     /**
      * Delete

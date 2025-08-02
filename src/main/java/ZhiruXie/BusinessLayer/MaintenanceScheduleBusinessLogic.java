@@ -18,23 +18,23 @@ public class MaintenanceScheduleBusinessLogic {
     
     public MaintenanceScheduleBusinessLogic() {dao = new MaintenanceScheduleDAOImp();}
     
-    public List<MaintenanceScheduleDTO> getAllMaintenaceSchedules(int userId) {
-        return dao.getAllMaintenaceSchedules(userId);
+    public List<MaintenanceScheduleDTO> getAll(int userId) {
+        return dao.getAll(userId);
     }
 
-    public MaintenanceScheduleDTO getMaintenaceScheduleById(int userId, int scheduleId) {
-        return dao.getMaintenaceScheduleById(userId, scheduleId);
+    public MaintenanceScheduleDTO getSingleById(int userId, int scheduleId) {
+        return dao.getSingleById(userId, scheduleId);
     }
 
-    public boolean addMaintenaceSchedule(int userId, MaintenanceScheduleDTO schedule) {
-        return dao.addMaintenaceSchedule(userId, schedule);
+    public boolean add(int userId, MaintenanceScheduleDTO schedule) {
+        return dao.add(userId, schedule);
     }
 
-    public boolean updateMaintenanceSchedule(int userId, MaintenanceScheduleDTO schedule) {
-        return dao.updateMaintenanceSchedule(userId, schedule);
+    public boolean update(int userId, MaintenanceScheduleDTO schedule) {
+        return dao.update(userId, schedule);
     }
 
-    public boolean deleteMaintenanceSchedule(int userId, int scheduleId) {
-        return dao.deleteMaintenanceSchedule(userId, scheduleId);
+    public boolean delete(int userId, int scheduleId) {
+        return dao.delete(userId, scheduleId);
     }
 }

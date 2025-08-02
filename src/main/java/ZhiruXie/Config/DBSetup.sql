@@ -130,14 +130,12 @@ CREATE TABLE trip_records (
     start_time DATETIME NOT NULL,
     end_time DATETIME,
     scheduled_start DATETIME NOT NULL,
-    actual_start DATETIME NOT NULL,
     on_time_flag BOOLEAN DEFAULT FALSE,
     distance_km DOUBLE NOT NULL,
     trip_length INT NOT NULL, -- minutes
     idle_minutes INT DEFAULT 0,
     fuel_spent DOUBLE,
     passengers INT,
-    trip_day DATE NOT NULL,
     FOREIGN KEY (operator_ref) REFERENCES user(id),
     FOREIGN KEY (vehicle_ref) REFERENCES transit_vehicles(id)
 );
@@ -166,10 +164,10 @@ INSERT INTO service_logs (vehicle_ref, break_start, break_end, log_type, operato
 ('RAIL001', '2025-03-27 13:00:00', NULL, 'OutOfService', 3);
 
 -- Sample Trip Data
-INSERT INTO trip_records (operator_ref, vehicle_ref, route_name, start_time, end_time, scheduled_start, actual_start, on_time_flag, distance_km, trip_length, idle_minutes, fuel_spent, passengers, trip_day) VALUES
-(2, 'BUS001', 'Route A', '2025-03-27 07:55:00', '2025-03-27 08:55:00', '2025-03-27 08:00:00', '2025-03-27 07:55:00', TRUE, 50.5, 60, 5, 12.5, 40, '2025-03-27'),
-(3, 'RAIL001', 'Route B', '2025-03-27 08:10:00', '2025-03-27 09:20:00', '2025-03-27 08:00:00', '2025-03-27 08:10:00', FALSE, 45.0, 70, 10, 55.0, 65, '2025-03-27'),
-(2, 'BUS001', 'Route A', '2025-03-28 07:50:00', '2025-03-28 08:50:00', '2025-03-28 08:00:00', '2025-03-28 07:50:00', TRUE, 52.0, 60, 3, 11.8, 45, '2025-03-28');
+INSERT INTO trip_records (operator_ref, vehicle_ref, route_name, start_time, end_time, scheduled_start, on_time_flag, distance_km, trip_length, idle_minutes, fuel_spent, passengers) VALUES
+(2, 'BUS001', 'Route A', '2025-03-27 07:55:00', '2025-03-27 08:55:00', '2025-03-27 08:00:00', TRUE, 50.5, 60, 5, 12.5, 40),
+(3, 'RAIL001', 'Route B', '2025-03-27 08:10:00', '2025-03-27 09:20:00', '2025-03-27 08:00:00', FALSE, 45.0, 70, 10, 55.0, 65),
+(2, 'BUS001', 'Route A', '2025-03-28 07:50:00', '2025-03-28 08:50:00', '2025-03-28 08:00:00', TRUE, 52.0, 60, 3, 11.8, 45);
 
 -- Sample Energy Usage
 INSERT INTO fuel_energy_logs (vehicle_ref, energy_type, quantity_used, km_covered, recorded_at) VALUES
@@ -206,7 +204,7 @@ VALUES (1, 'BUS001', 'Replace brake pads and perform brake system check', '2025-
 
 -- Maintenance Task 2: RAIL001 - Pantograph (In Progress)
 INSERT INTO maintenance_schedule (component_ref, vehicle_ref, task_description, planned_date, progress_status, assigned_technician)
-VALUES (2, 'RAIL001', 'Clean and inspect pantograph contacts', '2025-08-01', 'In Progress', 1);
+VALUES (2, 'RAIL001', 'Clean and inspect pantograph contacts', '2025-08-01', 'InProgress', 1);
 
 -- Maintenance Task 3: TRAIN001 - Engine (Scheduled)
 INSERT INTO maintenance_schedule (component_ref, vehicle_ref, task_description, planned_date, progress_status, assigned_technician)

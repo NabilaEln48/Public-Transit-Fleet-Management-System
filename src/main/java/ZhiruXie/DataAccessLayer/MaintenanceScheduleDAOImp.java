@@ -20,7 +20,7 @@ import java.util.List;
 public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
 
     @Override
-    public List<MaintenanceScheduleDTO> getAllMaintenaceSchedules(int userId) {
+    public List<MaintenanceScheduleDTO> getAll(int userId) {
         String sql = "select * from ptfms_db.maintenance_schedule where assigned_technician = ?";
         ArrayList<MaintenanceScheduleDTO> scheduleItems = null;
         try(
@@ -42,7 +42,6 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
                     );
                     scheduleItems.add(schedule);
                 }
-                int size = scheduleItems.size();
             }
             catch(SQLException e){
                 System.out.println(e.getMessage());
@@ -55,22 +54,22 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
     }
 
     @Override
-    public MaintenanceScheduleDTO getMaintenaceScheduleById(int userId, int scheduleId) {
+    public MaintenanceScheduleDTO getSingleById(int userId, int scheduleId) {
         return null;
     }
 
     @Override
-    public boolean addMaintenaceSchedule(int userId, MaintenanceScheduleDTO schedule) {
+    public boolean add(int userId, MaintenanceScheduleDTO schedule) {
         return true;
     }
 
     @Override
-    public boolean updateMaintenanceSchedule(int userId, MaintenanceScheduleDTO schedule) {
+    public boolean update(int userId, MaintenanceScheduleDTO schedule) {
         return true;
     }
 
     @Override
-    public boolean deleteMaintenanceSchedule(int userId, int scheduleId) {
+    public boolean delete(int userId, int scheduleId) {
         return true;
     }
     
