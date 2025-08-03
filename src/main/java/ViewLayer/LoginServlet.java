@@ -71,25 +71,18 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("userName", user.getName());
                 session.setAttribute("userType", user.getUserType());
 
-                // Diagnostic logging
-                String context = request.getContextPath();
-                String role = user.getUserType().toLowerCase();
-                System.out.println("CONTEXT: " + context);
-                System.out.println("ROLE: " + role);
-
-                // Hardcoded fallback
-                String base = (context == null || context.isEmpty()) ? "/Group.Project.Nabila.Msiah" : context;
+                String contextPath = request.getContextPath();
                 String redirectUrl;
 
-                switch (role) {
+                switch (user.getUserType().toLowerCase()) {
                     case "manager":
-                        redirectUrl = base + "/manager.jsp";
+                        redirectUrl = contextPath + "/manager.jsp";
                         break;
                     case "operator":
-                        redirectUrl = base + "/operator.jsp";
+                        redirectUrl = contextPath + "/operator.jsp";
                         break;
                     default:
-                        redirectUrl = base + "/login.jsp";
+                        redirectUrl = contextPath + "/login.jsp";
                         break;
                 }
 

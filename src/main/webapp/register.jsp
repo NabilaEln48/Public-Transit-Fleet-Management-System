@@ -1,77 +1,105 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %>
-<!--
-    Author       : Nabila Msiah 041146732
-    Course       : CST8288 - Group Project - Authentication Module (Nabila Msiah Part)
-    Description  : Secure JSP form for user registration, using Front Controller for routing.
--->
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Register - Public Transit Fleet Management System</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin: 0;
         }
+
         .form-container {
-            background-color: #fff;
-            padding: 24px 36px;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-            width: 350px;
+            background-color: #1e1e1e;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            width: 400px;
         }
+
         h2 {
-            margin-top: 0;
             text-align: center;
+            color: #61dafb;
+            margin-bottom: 25px;
         }
+
         label {
-            font-weight: bold;
             display: block;
             margin-top: 12px;
+            margin-bottom: 4px;
+            font-size: 14px;
+            color: #dddddd;
         }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 4px;
-            margin-bottom: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
+
+        input,
+        select {
             width: 100%;
             padding: 10px;
-            background-color: #0066cc;
+            border: 1px solid #444;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #61dafb;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #3498db;
             color: white;
             border: none;
             border-radius: 4px;
-            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
         }
+
         button:hover {
-            background-color: #004a99;
+            background-color: #2980b9;
         }
+
         .message {
-            margin-top: 12px;
+            margin-top: 15px;
             text-align: center;
-            font-weight: bold;
+            font-size: 14px;
         }
+
         .error {
-            color: red;
+            color: #e74c3c;
         }
+
         .success {
-            color: green;
+            color: #2ecc71;
         }
+
         .link {
-            margin-top: 16px;
             text-align: center;
+            margin-top: 20px;
+        }
+
+        .link a {
+            color: #61dafb;
+            text-decoration: none;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -82,17 +110,17 @@
     <form action="${pageContext.request.contextPath}/auth" method="post">
         <input type="hidden" name="action" value="register">
 
-        <label>Name:</label>
-        <input type="text" name="name" required>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
 
-        <label>Email:</label>
-        <input type="email" name="email" required>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
 
-        <label>Password:</label>
-        <input type="password" name="password" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
 
-        <label>Role:</label>
-        <select name="role" required>
+        <label for="role">Role:</label>
+        <select name="role" id="role" required>
             <option value="MANAGER">Manager</option>
             <option value="OPERATOR">Operator</option>
         </select>
@@ -101,7 +129,7 @@
     </form>
 
     <div class="link">
-        <a href="${pageContext.request.contextPath}/controller?action=showLogin">Already have an account? Login here</a>
+        <p><a href="${pageContext.request.contextPath}/controller?action=showLogin">Already have an account? Login here</a></p>
     </div>
 
     <div class="message">
