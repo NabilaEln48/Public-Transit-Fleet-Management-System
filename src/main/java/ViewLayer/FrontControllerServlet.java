@@ -25,33 +25,32 @@ public class FrontControllerServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action == null || action.trim().isEmpty()) {
-            // Default fallback: redirect to login
-            response.sendRedirect("login.jsp");
+            // Default fallback: redirect to login page
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
             return;
         }
 
         switch (action) {
 
-            // Show login page
             case "showLogin":
+                // Forward to login.jsp
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
                 break;
 
-            // Show register page
             case "showRegister":
+                // Forward to register.jsp
                 request.getRequestDispatcher("/register.jsp").forward(request, response);
                 break;
 
-            // Handle logout and session invalidation
             case "logout":
+                // Logout logic
                 HttpSession session = request.getSession(false);
                 if (session != null) {
                     session.invalidate();
                 }
-                response.sendRedirect("login.jsp");
+                response.sendRedirect(request.getContextPath() + "/login.jsp");
                 break;
 
-            // Redirect to correct dashboard based on user type
             case "dashboardRedirect":
                 HttpSession currentSession = request.getSession(false);
                 if (currentSession != null) {
@@ -59,21 +58,20 @@ public class FrontControllerServlet extends HttpServlet {
                     if (user != null) {
                         String role = user.getUserType();
                         if ("MANAGER".equalsIgnoreCase(role)) {
-                            response.sendRedirect("manager.jsp");
+                            response.sendRedirect(request.getContextPath() + "/manager.jsp");
                         } else if ("OPERATOR".equalsIgnoreCase(role)) {
-                            response.sendRedirect("operator.jsp");
+                            response.sendRedirect(request.getContextPath() + "/operator.jsp");
                         } else {
-                            response.sendRedirect("login.jsp"); // unknown role
+                            response.sendRedirect(request.getContextPath() + "/login.jsp"); // unknown role
                         }
                         return;
                     }
                 }
-                response.sendRedirect("login.jsp"); // no session or user
+                response.sendRedirect(request.getContextPath() + "/login.jsp"); // no session or user
                 break;
 
-            // Unknown or unsupported action
             default:
-                response.sendRedirect("login.jsp");
+                response.sendRedirect(request.getContextPath() + "/login.jsp");
                 break;
         }
     }

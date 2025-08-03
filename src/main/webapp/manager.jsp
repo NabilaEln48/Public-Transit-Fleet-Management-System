@@ -1,17 +1,14 @@
-<%-- 
-    Author : Nabila Msiah 041146732
-    Course : CST8288 - Group Project - Authentication Module (Nabila Msiah Part)
-    Description : Manager dashboard view. Redirects to login.jsp if user is not a manager.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     String role = (String) session.getAttribute("userType");
-
     if (role == null || !role.equalsIgnoreCase("manager")) {
         response.sendRedirect("login.jsp");
         return;
     }
 %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,37 +16,98 @@
     <title>Manager Dashboard</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f6f6f6;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        ul {
-            list-style-type: none;
+            margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f4f7;
         }
-        li {
-            margin: 10px 0;
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-        a {
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .section {
+            margin-top: 40px;
+        }
+
+        .section h2 {
+            font-size: 18px;
+            color: #34495e;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #f9fafb;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid #e1e4e8;
+        }
+
+        .card:hover {
+            background-color: #eef1f5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .card a {
             text-decoration: none;
-            color: #0077cc;
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        .logout-link {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        .logout-link a {
+            color: #c0392b;
+            text-decoration: none;
+        }
+
+        .logout-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome, Manager!</h1>
+    <div class="container">
+        <h1>Welcome, Manager!</h1>
 
-    <p>You may view or supervise operator actions:</p>
-    <ul>
-        <li><a href="viewReports.jsp">View Reports</a></li>
-        <li><a href="viewGPSLogs.jsp">View GPS Logs</a></li>
-        <li><a href="fuelConsumptionSummary.jsp">View Fuel Consumption</a></li>
-        <li><a href="maintenanceOverview.jsp">View Out-of-Service Logs</a></li>
-    </ul>
+        <div class="section">
+            <h2>Administrative Tools</h2>
+            <div class="card-grid">
+                <div class="card"><a href="${ctx}/viewReports.jsp">View Reports</a></div>
+                <div class="card"><a href="${ctx}/viewGPSLogs.jsp">View GPS Logs</a></div>
+                <div class="card"><a href="${ctx}/fuelConsumptionSummary.jsp">Fuel Consumption Summary</a></div>
+                <div class="card"><a href="${ctx}/maintenanceOverview.jsp">Maintenance Overview</a></div>
+            </div>
+        </div>
 
-    <br><a href="${pageContext.request.contextPath}/logout">Logout</a>
+        <div class="logout-link">
+            <a href="${ctx}/logout">Logout</a>
+        </div>
+    </div>
 </body>
 </html>
