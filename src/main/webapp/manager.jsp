@@ -14,84 +14,112 @@
 <head>
     <meta charset="UTF-8">
     <title>Manager Dashboard</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f2f4f7;
-        }
+<!-- (header remains unchanged, only style section modified) -->
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #121212; /* BLACK BACKGROUND */
+        color: #f5f5f5; /* LIGHT TEXT */
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
+    .navbar {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 16px;
+    }
 
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
+    .navbar .app-title {
+        font-weight: bold;
+    }
 
-        .section {
-            margin-top: 40px;
-        }
+    .navbar .user-role {
+        font-style: italic;
+    }
 
-        .section h2 {
-            font-size: 18px;
-            color: #34495e;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
-        }
+    .navbar .logout-btn {
+        color: white;
+        text-decoration: none;
+        padding: 6px 12px;
+        background-color: #c0392b;
+        border-radius: 4px;
+        font-weight: 500;
+    }
 
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
+    .navbar .logout-btn:hover {
+        background-color: #e74c3c;
+    }
 
-        .card {
-            background-color: #f9fafb;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            transition: 0.3s;
-            border: 1px solid #e1e4e8;
-        }
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #1e1e1e;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
 
-        .card:hover {
-            background-color: #eef1f5;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
+    h1 {
+        text-align: center;
+        color: #ffffff;
+    }
 
-        .card a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: 500;
-        }
+    .section {
+        margin-top: 40px;
+    }
 
-        .logout-link {
-            display: block;
-            text-align: center;
-            margin-top: 40px;
-            font-size: 14px;
-        }
+    .section h2 {
+        font-size: 18px;
+        color: #dddddd;
+        border-bottom: 1px solid #444;
+        padding-bottom: 5px;
+    }
 
-        .logout-link a {
-            color: #c0392b;
-            text-decoration: none;
-        }
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
 
-        .logout-link a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    .card {
+        background-color: #2c2c2c;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        transition: 0.3s;
+        border: 1px solid #3a3a3a;
+    }
+
+    .card:hover {
+        background-color: #3a3a3a;
+        box-shadow: 0 4px 10px rgba(255,255,255,0.05);
+    }
+
+    .card a {
+        text-decoration: none;
+        color: #61dafb;
+        font-weight: 500;
+    }
+
+</style>
+
 </head>
 <body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="app-title">PTFMS - Manager Dashboard</div>
+        <div class="user-role">Logged in as: <%= role %></div>
+        <a class="logout-btn" href="${ctx}/logout">Logout</a>
+    </nav>
+
+    <!-- Main Content -->
     <div class="container">
         <h1>Welcome, Manager!</h1>
 
@@ -103,10 +131,6 @@
                 <div class="card"><a href="${ctx}/fuelConsumptionSummary.jsp">Fuel Consumption Summary</a></div>
                 <div class="card"><a href="${ctx}/maintenanceOverview.jsp">Maintenance Overview</a></div>
             </div>
-        </div>
-
-        <div class="logout-link">
-            <a href="${ctx}/logout">Logout</a>
         </div>
     </div>
 </body>

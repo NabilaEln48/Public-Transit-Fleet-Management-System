@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     String role = (String) session.getAttribute("userType");
@@ -10,30 +10,62 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Operator Dashboard</title>
+    <title>Operator Dashboard - PTFMS</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f2f4f7;
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+
+        .navbar {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .navbar .app-title {
+            font-weight: bold;
+        }
+
+        .navbar .user-role {
+            font-style: italic;
+        }
+
+        .navbar .logout-btn {
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            background-color: #c0392b;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .navbar .logout-btn:hover {
+            background-color: #e74c3c;
         }
 
         .container {
             max-width: 900px;
-            margin: 50px auto;
+            margin: 40px auto;
             padding: 30px;
-            background-color: #ffffff;
+            background-color: #1e1e1e;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
         h1 {
             text-align: center;
-            color: #2c3e50;
+            color: #ffffff;
         }
 
         .section {
@@ -42,8 +74,8 @@
 
         .section h2 {
             font-size: 18px;
-            color: #34495e;
-            border-bottom: 1px solid #ddd;
+            color: #dddddd;
+            border-bottom: 1px solid #444;
             padding-bottom: 5px;
         }
 
@@ -55,43 +87,37 @@
         }
 
         .card {
-            background-color: #f9fafb;
+            background-color: #2c2c2c;
             border-radius: 8px;
             padding: 20px;
             text-align: center;
             transition: 0.3s;
-            border: 1px solid #e1e4e8;
+            border: 1px solid #3a3a3a;
         }
 
         .card:hover {
-            background-color: #eef1f5;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            background-color: #3a3a3a;
+            box-shadow: 0 4px 10px rgba(255,255,255,0.05);
         }
 
         .card a {
             text-decoration: none;
-            color: #007bff;
+            color: #61dafb;
             font-weight: 500;
-        }
-
-        .logout-link {
-            display: block;
-            text-align: center;
-            margin-top: 40px;
-            font-size: 14px;
-        }
-
-        .logout-link a {
-            color: #c0392b;
-            text-decoration: none;
-        }
-
-        .logout-link a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="app-title">PTFMS - Operator Dashboard</div>
+        <div class="user-role">Logged in as: <%= role.toUpperCase() %></div>
+        <a class="logout-btn" href="${ctx}/logout">Logout</a>
+    </nav>
+
+    <!-- Main Content -->
     <div class="container">
         <h1>Welcome, <%= role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase() %>!</h1>
 
@@ -116,10 +142,6 @@
                 </div>
             </div>
         <% } %>
-
-        <div class="logout-link">
-            <a href="${ctx}/logout">Logout</a>
-        </div>
     </div>
 </body>
 </html>
