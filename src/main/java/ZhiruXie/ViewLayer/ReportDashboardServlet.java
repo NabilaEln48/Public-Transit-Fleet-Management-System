@@ -29,11 +29,12 @@ public class ReportDashboardServlet extends HttpServlet{
         throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {   
+            String role = request.getAttribute("role").toString();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Report Dashboard</title>");   
-            out.println("<link rel=\"stylesheet\" href=\"css/ReportDashboardServlet.css\" />");
+            out.println("<link rel=\"stylesheet\" href=\"css/ReportDashboard.css\" />");
             out.println("</head>");
             out.println("<body>");
             // content
@@ -42,7 +43,9 @@ public class ReportDashboardServlet extends HttpServlet{
             out.println("<div class=\"buttons\">");
             out.println("<button type=\"submit\" name=\"action\" value=\"MaintenanceDashboard\">Maintenance Dashboard</button>");
             out.println("<button type=\"submit\" name=\"action\" value=\"PerformanceDashboard\">Performance Dashboard</button>");
-            out.println("<button type=\"submit\" name=\"action\" value=\"CostReports\">Cost Reports</button>");
+            if(role.equalsIgnoreCase("MANAGER")){
+                out.println("<button type=\"submit\" name=\"action\" value=\"CostReports\">Cost Reports</button>");
+            }
             out.println("</div>");
             out.println("</form>");
             //content
