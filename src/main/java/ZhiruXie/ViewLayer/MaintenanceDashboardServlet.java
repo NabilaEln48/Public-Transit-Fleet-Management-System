@@ -31,6 +31,7 @@ public class MaintenanceDashboardServlet extends HttpServlet{
         throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            String role = request.getSession().getAttribute("userType").toString();
             List<MaintenanceScheduleDTO> schedules = (List<MaintenanceScheduleDTO>)request.getAttribute("schedules");
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -41,15 +42,34 @@ public class MaintenanceDashboardServlet extends HttpServlet{
             out.println("<body>");
             // content
             out.println("<h1>Maintenance Dashboard</h1>");
-            for (MaintenanceScheduleDTO schedule : schedules) {
-                out.println("<div class='card'>");
-                out.println("<h2>Schedule #" + schedule.getId() + "</h2>");
-                out.println("<p><span class='label'>Component ID:</span> " + schedule.getComponentId() + "</p>");
-                out.println("<p><span class='label'>Vehicle ID:</span> " + schedule.getVehicleId() + "</p>");
-                out.println("<p><span class='label'>Task Description:</span> " + schedule.getTaskDescription() + "</p>");
-                out.println("<p><span class='label'>Planned Date:</span> " + schedule.getPlannedDate() + "</p>");
-                out.println("<p><span class='label'>Status:</span> " + schedule.getProgressStatus() + "</p>");
+            if(role.equalsIgnoreCase("MANAGER")){
+                String technicianParam = request.getParameter("technicianId");
+                String technicianValue = (technicianParam != null && !technicianParam.isEmpty())
+                    ? technicianParam
+                    : request.getSession().getAttribute("userId").toString();
+                out.println("<div style='display:flex; justify-content:center; margin-bottom:30px;'>");
+                out.println("<form method='get' action='FrontendController' style='display:flex; flex-wrap:wrap; align-items:center; background-color:#fff; padding:20px 30px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.08); gap:15px;'>");
+                out.println("<input type='hidden' name='action' value='MaintenanceDashboard' />");
+                out.println("<label for='technicianId' style='font-weight:600; color:#34495e;'>Technician Id:</label>");
+                out.println("<input type='text' id='technicianId' name='technicianId' value='" + technicianValue + "' style='padding:10px 14px; border:1px solid #ccc; border-radius:6px; font-size:15px; min-width:120px;' />");
+                out.println("<button type='submit' style='background-color:#2980b9; color:white; padding:10px 18px; border:none; border-radius:6px; font-size:15px; cursor:pointer;'>Find Records</button>");
+                out.println("</form>");
                 out.println("</div>");
+
+            }
+            if (schedules == null || schedules.isEmpty()) {
+                out.println("<p>No maintenance records found for the specified technician.</p>");
+            } else {
+                for (MaintenanceScheduleDTO schedule : schedules) {
+                    out.println("<div class='card'>");
+                    out.println("<h2>Schedule #" + schedule.getId() + "</h2>");
+                    out.println("<p><span class='label'>Component ID:</span> " + schedule.getComponentId() + "</p>");
+                    out.println("<p><span class='label'>Vehicle ID:</span> " + schedule.getVehicleId() + "</p>");
+                    out.println("<p><span class='label'>Task Description:</span> " + schedule.getTaskDescription() + "</p>");
+                    out.println("<p><span class='label'>Planned Date:</span> " + schedule.getPlannedDate() + "</p>");
+                    out.println("<p><span class='label'>Status:</span> " + schedule.getProgressStatus() + "</p>");
+                    out.println("</div>");
+                }
             }
             //content
             out.println("</body>");

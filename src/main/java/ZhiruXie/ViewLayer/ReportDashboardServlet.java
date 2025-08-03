@@ -29,7 +29,7 @@ public class ReportDashboardServlet extends HttpServlet{
         throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {   
-            String role = request.getAttribute("role").toString();
+            String role = request.getSession().getAttribute("userType").toString();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");

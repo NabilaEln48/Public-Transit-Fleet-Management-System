@@ -67,11 +67,16 @@ public class FrontendController extends HttpServlet{
     private boolean prepareRequest(HttpServletRequest request, HttpServletResponse response, String action) throws IOException, NullPointerException{
         switch (action){
             case "ReportDashboard" -> {
-                request.setAttribute("role", request.getSession().getAttribute("userType").toString());
             }
             case "MaintenanceDashboard" -> {
-                int userId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
-                List<MaintenanceScheduleDTO> schedules = scheduleBusinessLogic.getAll(userId);
+                String techIdParam = request.getParameter("technicianId");
+                int technicianId;
+                if (techIdParam != null && !techIdParam.isEmpty()) {
+                    technicianId = Integer.parseInt(techIdParam);
+                } else {
+                    technicianId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
+                }
+                List<MaintenanceScheduleDTO> schedules = scheduleBusinessLogic.getAll(technicianId);
                 request.setAttribute("schedules", schedules);
             }
             case "PerformanceDashboard" -> {
