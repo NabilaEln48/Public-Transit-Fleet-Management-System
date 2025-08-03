@@ -4,8 +4,10 @@
  */
 package ZhiruXie.ControllerLayer;
 
+import ZhiruXie.BusinessLayer.AnalyticsReportBusinessLogic;
 import ZhiruXie.BusinessLayer.MaintenanceScheduleBusinessLogic;
 import ZhiruXie.BusinessLayer.PerformanceBusinessLogic;
+import ZhiruXie.DTO.CostAnalysisDTO;
 import ZhiruXie.DTO.MaintenanceScheduleDTO;
 import ZhiruXie.DTO.PerformanceDTO;
 import java.io.IOException;
@@ -22,8 +24,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FrontendController extends HttpServlet{
     /** The business logic instance that are used for calling detailed logic from the DAO implementation class. */
-    private MaintenanceScheduleBusinessLogic scheduleBusinessLogic = new MaintenanceScheduleBusinessLogic();
-    private PerformanceBusinessLogic performanceBusinessLogic = new PerformanceBusinessLogic();
+    private final MaintenanceScheduleBusinessLogic scheduleBusinessLogic = new MaintenanceScheduleBusinessLogic();
+    private final PerformanceBusinessLogic performanceBusinessLogic = new PerformanceBusinessLogic();
+    private final AnalyticsReportBusinessLogic analysisBusinessLogic = new AnalyticsReportBusinessLogic();
     /** Target url for new web page. */
     private String targetUrl;
     
@@ -77,7 +80,8 @@ public class FrontendController extends HttpServlet{
                 request.setAttribute("performanceRecords", performanceRecords);
             }
             case "CostReports" -> {
-                
+                List<CostAnalysisDTO> analysisRecords = analysisBusinessLogic.getAll();
+                request.setAttribute("AnalysisRecords", analysisRecords);
             }
         }
         return true;

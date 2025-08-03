@@ -42,7 +42,7 @@ public class ReportDashboardServlet extends HttpServlet{
             out.println("<div class=\"buttons\">");
             out.println("<button type=\"submit\" name=\"action\" value=\"MaintenanceDashboard\">Maintenance Dashboard</button>");
             out.println("<button type=\"submit\" name=\"action\" value=\"PerformanceDashboard\">Performance Dashboard</button>");
-            out.println("<button type=\"submit\" name=\"action\" value=\"CostReport\">Cost Reports</button>");
+            out.println("<button type=\"submit\" name=\"action\" value=\"CostReports\">Cost Reports</button>");
             out.println("</div>");
             out.println("</form>");
             //content

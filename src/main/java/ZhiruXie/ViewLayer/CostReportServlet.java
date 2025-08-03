@@ -4,8 +4,11 @@
  */
 package ZhiruXie.ViewLayer;
 
+import ZhiruXie.DTO.CostAnalysisDTO;
+import ZhiruXie.Utility.TimestampFormatter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,14 +32,39 @@ public class CostReportServlet extends HttpServlet{
         throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {   
+            List<CostAnalysisDTO> records = (List<CostAnalysisDTO>)request.getAttribute("AnalysisRecords");
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Cost Report Page</title>");   
+            out.println("<title>Cost Report Page</title>");  
+            out.println("<link rel='stylesheet' type='text/css' href='css/CostAnalysisDashboard.css'>");
             out.println("</head>");
             out.println("<body>");
             // content
-            out.println("<h1>Cost Reports</h1>");
+            out.println("<h1>Fuel & Maintenance Cost Reports</h1>");
+            if (records != null && !records.isEmpty()) {
+                for (CostAnalysisDTO record : records) {
+                    String recordType = record.getType();
+                    out.println("<div class='card'>");
+                    out.println("<h2>Report #" + record.getId() + "</h2>");
+                    out.println("<p><span class='label'>Report Type:</span> " + recordType + "</p>");
+                    String payload = record.getPayload();
+                    String vehicleId = payload.split(":")[0].strip();
+                    String info = payload.split(":")[1].strip();
+                    if(recordType.endsWith("Fuel Usage")){
+                        out.println("<p><span class='label'>Vehicle ID:</span> " + vehicleId + "</p>");
+                        out.println("<p><span class='label'>Fuel Usage:</span> " + info + "</p>");
+                    }
+                    else if(recordType.endsWith("Maintenance Cost")){
+                        out.println("<p><span class='label'>Vehicle ID:</span> " + vehicleId + "</p>");
+                        out.println("<p><span class='label'>Estimated Maintenance Cost:</span> " + info + "</p>");
+                    }
+                    out.println("<p><span class='label'>Created At:</span> " + TimestampFormatter.format(record.getDateOfCreate()) + "</p>");
+                    out.println("</div>");
+                }
+            } else {
+                out.println("<p>No cost reports available.</p>");
+            }
             //content
             out.println("</body>");
             out.println("</html>");

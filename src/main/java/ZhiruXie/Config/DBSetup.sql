@@ -193,8 +193,10 @@ INSERT INTO maintenance_schedule (component_ref, vehicle_ref, task_description, 
 
 -- Sample Reports
 INSERT INTO analytics_reports (report_category, report_payload, created_at) VALUES
-('Fuel Usage', 'BUS001: 10.5L, RAIL001: 50kWh', '2025-03-27 11:00:00'),
-('Maintenance Cost', 'Estimated cost for BUS001: $500', '2025-03-27 12:00:00');
+('Fuel Usage', 'BUS001: 10.5L', '2025-03-27 11:00:00'),
+('Fuel Usage', 'RAIL001: 50kWh', '2025-03-28 17:00:00'),
+('Maintenance Cost', 'BUS001: $500', '2025-03-31 12:00:00'),
+('Maintenance Cost', 'RAIL001: $2000', '2025-03-31 12:00:00');
 
 
 -- Customized
