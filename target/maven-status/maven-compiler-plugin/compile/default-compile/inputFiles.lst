@@ -1,4 +1,13 @@
-C:\Users\simra\OneDrive\Documents\NetBeansProjects\Final_Project\src\main\java\Entity\Component.java
-C:\Users\simra\OneDrive\Documents\NetBeansProjects\Final_Project\src\main\java\Entity\FuelUsage.java
-C:\Users\simra\OneDrive\Documents\NetBeansProjects\Final_Project\src\main\java\Entity\Alert.java
-C:\Users\simra\OneDrive\Documents\NetBeansProjects\Final_Project\src\main\java\Entity\Maintenance.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\DataAccessLayer\DataSource.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\ViewLayer\FrontControllerServlet.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\transferObject\CredentialsDTO.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\DataAccessLayer\FuelEnergyLogDAO.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\transferObject\FuelEnergyLogDTO.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\JakartaRestConfiguration.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\BusinessLayer\EnergyBusinessLogic.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\BusinessLayer\EnergyStrategy.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\resources\JakartaEE8Resource.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\transferObject\UserDTO.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\DataAccessLayer\FuelUsageDAOImp.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\transferObject\SystemAlertDTO.java
+C:\Users\simra\OneDrive\Documents\NetBeansProjects\Public-Transit-Fleet-Management-System-PTFMS-\Simran_Final_Project\src\main\java\com\algonquincollege\simran_final_project\transferObject\SystemComponentDTO.java
