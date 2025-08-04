@@ -31,7 +31,8 @@ public class PerformanceDashboardServlet extends HttpServlet{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {   
+        try ( PrintWriter out = response.getWriter()) {
+            String role = request.getSession().getAttribute("userType").toString();
             List<PerformanceDTO> records = (List<PerformanceDTO>)request.getAttribute("performanceRecords");
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -42,6 +43,26 @@ public class PerformanceDashboardServlet extends HttpServlet{
             out.println("<body>");
             // content
             out.println("<h1>Performance Dashboard</h1>");
+            if(role.equalsIgnoreCase("MANAGER")){
+                String operatorParam = request.getParameter("operatorId");
+                String operatorStr = (operatorParam != null && !operatorParam.isEmpty())
+                    ? operatorParam
+                    : request.getSession().getAttribute("userId").toString();
+                out.println("<div style='display:flex; justify-content:center; margin-bottom:30px;'>");
+                out.println("<form method='get' action='FrontendController' style='display:flex; flex-wrap:wrap; align-items:center; background-color:#fff; padding:20px 30px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.08); gap:15px;'>");
+                out.println("<input type='hidden' name='action' value='PerformanceDashboard' />");
+                out.println("<label for='operatorId' style='font-weight:600; color:#34495e;'>Operator Id:</label>");
+                out.println("<input type='text' id='operatorId' name='operatorId' value='" + operatorStr + "' style='padding:10px 14px; border:1px solid #ccc; border-radius:6px; font-size:15px; min-width:120px;' />");
+                out.println("<button type='submit' style='background-color:#2980b9; color:white; padding:10px 18px; border:none; border-radius:6px; font-size:15px; cursor:pointer;'>Find Records</button>");
+                out.println("</form>");
+                String errorMsg = (String) request.getAttribute("errorMessage");
+                out.println("</div>");
+                if (errorMsg != null) {
+                    out.println("<div style='color: red; font-weight: bold; text-align: center; margin-bottom: 20px;'>");
+                    out.println(errorMsg);
+                    out.println("</div>");
+                }
+            }
             if (records != null && !records.isEmpty()) {
                 for (PerformanceDTO record : records) {
                     out.println("<div class='card'>");

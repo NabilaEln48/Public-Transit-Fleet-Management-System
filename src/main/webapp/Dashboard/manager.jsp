@@ -44,7 +44,7 @@
 
     <p>You may view or supervise operator actions:</p>
     <ul>
-        <li><a href="viewReports.jsp">View Reports</a></li>
+        <a href="${pageContext.request.contextPath}/FrontendController?action=ReportDashboard">View Reports</a>
         <li><a href="viewGPSLogs.jsp">View GPS Logs</a></li>
         <li><a href="fuelConsumptionSummary.jsp">View Fuel Consumption</a></li>
         <li><a href="maintenanceOverview.jsp">View Out-of-Service Logs</a></li>

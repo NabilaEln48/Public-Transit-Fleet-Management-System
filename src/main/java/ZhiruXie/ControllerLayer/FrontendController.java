@@ -71,16 +71,36 @@ public class FrontendController extends HttpServlet{
             case "MaintenanceDashboard" -> {
                 String techIdParam = request.getParameter("technicianId");
                 int technicianId;
-                if (techIdParam != null && !techIdParam.isEmpty()) {
-                    technicianId = Integer.parseInt(techIdParam);
-                } else {
+                if (techIdParam == null || techIdParam.isBlank()) {
                     technicianId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
+                }
+                else{
+                    try {
+                        technicianId = Integer.parseInt(techIdParam);
+                        request.setAttribute("operatorId", technicianId); // for redisplay
+                    } catch (NumberFormatException e) {
+                        technicianId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
+                        request.setAttribute("errorMessage", "Invalid Technician Id. Please enter a number.");
+                    }
                 }
                 List<MaintenanceScheduleDTO> schedules = scheduleBusinessLogic.getAll(technicianId);
                 request.setAttribute("schedules", schedules);
             }
             case "PerformanceDashboard" -> {
-                int operatorId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
+                String operatorStr = request.getParameter("operatorId");
+                int operatorId;
+                if (operatorStr == null || operatorStr.isBlank()) {
+                    operatorId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
+                }
+                else{
+                    try {
+                        operatorId = Integer.parseInt(operatorStr);
+                        request.setAttribute("operatorId", operatorId); // for redisplay
+                    } catch (NumberFormatException e) {
+                        operatorId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
+                        request.setAttribute("errorMessage", "Invalid Operator ID. Please enter a number.");
+                    }
+                }
                 List<PerformanceDTO> performanceRecords = performanceBusinessLogic.getAll(operatorId);
                 request.setAttribute("performanceRecords", performanceRecords);
             }

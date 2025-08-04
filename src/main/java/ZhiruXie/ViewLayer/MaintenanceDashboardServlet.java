@@ -55,7 +55,13 @@ public class MaintenanceDashboardServlet extends HttpServlet{
                 out.println("<button type='submit' style='background-color:#2980b9; color:white; padding:10px 18px; border:none; border-radius:6px; font-size:15px; cursor:pointer;'>Find Records</button>");
                 out.println("</form>");
                 out.println("</div>");
-
+                String errorMsg = (String) request.getAttribute("errorMessage");
+                out.println("</div>");
+                if (errorMsg != null) {
+                    out.println("<div style='color: red; font-weight: bold; text-align: center; margin-bottom: 20px;'>");
+                    out.println(errorMsg);
+                    out.println("</div>");
+                }
             }
             if (schedules == null || schedules.isEmpty()) {
                 out.println("<p>No maintenance records found for the specified technician.</p>");

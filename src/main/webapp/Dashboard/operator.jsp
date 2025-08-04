@@ -48,7 +48,7 @@
             <li><a href="logGPS.jsp">Log GPS Data</a></li>
             <li><a href="declareOutOfService.jsp">Declare Out-of-Service</a></li>
             <li><a href="logFuelConsumption.jsp">Log Fuel Consumption</a></li>
-            <li><a href="viewReports.jsp">View Reports</a></li>
+            <a href="${pageContext.request.contextPath}/FrontendController?action=ReportDashboard">View Reports</a>
         </ul>
     <% } else if ("manager".equalsIgnoreCase(role)) { %>
         <p>You are logged in as a Manager. You may view or supervise operator actions:</p>
