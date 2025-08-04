@@ -42,7 +42,9 @@ public class MaintenanceDashboardServlet extends HttpServlet{
             out.println("<body>");
             // content
             out.println("<h1>Maintenance Dashboard</h1>");
+            String dashboardPage = "operator.jsp";
             if(role.equalsIgnoreCase("MANAGER")){
+                dashboardPage = "manager.jsp";
                 String technicianParam = request.getParameter("technicianId");
                 String technicianValue = (technicianParam != null && !technicianParam.isEmpty())
                     ? technicianParam
@@ -77,6 +79,9 @@ public class MaintenanceDashboardServlet extends HttpServlet{
                     out.println("</div>");
                 }
             }
+            out.println("<div class='return-container'>");
+            out.println("<a href='" + request.getContextPath() + "/" + dashboardPage + "' class='return-btn'>Return to Menu</a>");
+            out.println("</div>");
             //content
             out.println("</body>");
             out.println("</html>");

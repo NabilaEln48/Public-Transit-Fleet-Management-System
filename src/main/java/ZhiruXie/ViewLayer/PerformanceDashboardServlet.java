@@ -43,7 +43,9 @@ public class PerformanceDashboardServlet extends HttpServlet{
             out.println("<body>");
             // content
             out.println("<h1>Performance Dashboard</h1>");
+            String dashboardPage = "operator.jsp";
             if(role.equalsIgnoreCase("MANAGER")){
+                dashboardPage = "manager.jsp";
                 String operatorParam = request.getParameter("operatorId");
                 String operatorStr = (operatorParam != null && !operatorParam.isEmpty())
                     ? operatorParam
@@ -84,6 +86,9 @@ public class PerformanceDashboardServlet extends HttpServlet{
             } else {
                 out.println("<p>No performance data available.</p>");
             }
+            out.println("<div class='return-container'>");
+            out.println("<a href='" + request.getContextPath() + "/" + dashboardPage + "' class='return-btn'>Return to Menu</a>");
+            out.println("</div>");
             //content
             out.println("</body>");
             out.println("</html>");

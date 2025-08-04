@@ -96,3 +96,23 @@ form button:hover {
   font-style: italic;
   margin-top: 40px;
 }
+
+.return-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.return-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.return-btn:hover {
+  background-color: #2980b9;
+}
