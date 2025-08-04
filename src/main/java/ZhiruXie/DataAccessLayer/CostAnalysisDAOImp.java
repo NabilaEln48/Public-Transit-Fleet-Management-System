@@ -46,22 +46,75 @@ public class CostAnalysisDAOImp implements CostAnalysisDAO{
 
     @Override
     public CostAnalysisDTO getSingleById(int recordId) {
+        String sql = "SELECT * FROM ptfms_db.analytics_reports WHERE id = ?";
+        try (
+            Connection con = DataSource.getConnection("cst8288", "cst8288");
+            PreparedStatement pstmt = con.prepareStatement(sql)
+        ) {
+            pstmt.setInt(1, recordId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return new CostAnalysisDTO(
+                        rs.getInt("id"),
+                        rs.getString("report_category"),
+                        rs.getString("report_payload"),
+                        rs.getTimestamp("created_at").toLocalDateTime()
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
     @Override
     public boolean add(CostAnalysisDTO record) {
-        return true;
+        String sql = "INSERT INTO ptfms_db.analytics_reports (report_category, report_payload, created_at) VALUES (?, ?, ?)";
+        try (
+            Connection con = DataSource.getConnection("cst8288", "cst8288");
+            PreparedStatement pstmt = con.prepareStatement(sql)
+        ) {
+            pstmt.setString(1, record.getType());
+            pstmt.setString(2, record.getPayload());
+            pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(record.getDateOfCreate()));
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     @Override
     public boolean update(CostAnalysisDTO updatedRecord) {
-        return true;
+        String sql = "UPDATE ptfms_db.analytics_reports SET report_category = ?, report_payload = ?, created_at = ? WHERE id = ?";
+        try (
+            Connection con = DataSource.getConnection("cst8288", "cst8288");
+            PreparedStatement pstmt = con.prepareStatement(sql)
+        ) {
+            pstmt.setString(1, updatedRecord.getType());
+            pstmt.setString(2, updatedRecord.getPayload());
+            pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(updatedRecord.getDateOfCreate()));
+            pstmt.setInt(4, updatedRecord.getId());
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     @Override
     public boolean delete(int recordId) {
-        return true;
+        String sql = "DELETE FROM ptfms_db.analytics_reports WHERE id = ?";
+        try (
+            Connection con = DataSource.getConnection("cst8288", "cst8288");
+            PreparedStatement pstmt = con.prepareStatement(sql)
+        ) {
+            pstmt.setInt(1, recordId);
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
-    
 }
