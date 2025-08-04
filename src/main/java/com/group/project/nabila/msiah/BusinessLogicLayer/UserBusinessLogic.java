@@ -4,12 +4,12 @@
     Description  : Handles business logic related to user operations, such as authentication and registration.
 */
 
-package BusinessLogicLayer;
+package com.group.project.nabila.msiah.BusinessLogicLayer;
 
 import DataAccessLayer.DataSource;
-import DataAccessLayer.UserDAO;
-import DataAccessLayer.UserDAOImpl;
-import Transferobject.UserDTO;
+import com.group.project.nabila.msiah.DataAccessLayer.UserDAO;
+import com.group.project.nabila.msiah.DataAccessLayer.UserDAOImpl;
+import com.group.project.nabila.msiah.transferobject.UserDTO;
 
 import java.sql.Connection;
 import java.sql.SQLException;

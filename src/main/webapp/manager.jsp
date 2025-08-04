@@ -126,7 +126,7 @@
         <div class="section">
             <h2>Administrative Tools</h2>
             <div class="card-grid">
-                <div class="card"><a href="${ctx}/viewReports.jsp">View Reports</a></div>
+                <div class="card"><a href="${ctx}/ReportDashboard">View Reports</a></div>
                 <div class="card"><a href="${ctx}/viewGPSLogs.jsp">View GPS Logs</a></div>
                 <div class="card"><a href="${ctx}/fuelConsumptionSummary.jsp">Fuel Consumption Summary</a></div>
                 <div class="card"><a href="${ctx}/maintenanceOverview.jsp">Maintenance Overview</a></div>

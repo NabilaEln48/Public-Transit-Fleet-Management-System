@@ -4,7 +4,7 @@
     Description  : DTO for transferring user data across application layers.
 */
 
-package Transferobject;
+package com.group.project.nabila.msiah.transferobject;
 
 import java.io.Serializable;
 

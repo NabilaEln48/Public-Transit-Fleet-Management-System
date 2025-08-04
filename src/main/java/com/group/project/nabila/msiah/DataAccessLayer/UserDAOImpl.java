@@ -4,9 +4,9 @@
     Description  : Implements the UserDAO interface to handle user login and registration operations using JDBC.
 */
 
-package DataAccessLayer;
+package com.group.project.nabila.msiah.DataAccessLayer;
 
-import Transferobject.UserDTO;
+import com.group.project.nabila.msiah.transferobject.UserDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

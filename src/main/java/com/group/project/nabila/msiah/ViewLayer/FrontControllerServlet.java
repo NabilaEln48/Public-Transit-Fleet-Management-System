@@ -6,9 +6,9 @@
                    to dashboards based on roles.
 */
 
-package ViewLayer;
+package com.group.project.nabila.msiah.ViewLayer;
 
-import Transferobject.UserDTO;
+import com.group.project.nabila.msiah.transferobject.UserDTO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

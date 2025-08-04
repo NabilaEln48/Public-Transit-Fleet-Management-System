@@ -6,10 +6,10 @@
                    in session upon successful login.
 */
 
-package ViewLayer;
+package com.group.project.nabila.msiah.ViewLayer;
 
-import BusinessLogicLayer.UserBusinessLogic;
-import Transferobject.UserDTO;
+import com.group.project.nabila.msiah.BusinessLogicLayer.UserBusinessLogic;
+import com.group.project.nabila.msiah.transferobject.UserDTO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
