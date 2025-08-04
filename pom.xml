@@ -5,7 +5,7 @@
     <artifactId>Final_Project</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>Final_Project-1.0</name>
+    <name>Final_Project</name>
     
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
