@@ -1,6 +1,10 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Assessment: Project Group
+ * Course Id: CST8288 OOP with Design Patterns
+ * Section: 012
+ * Student Name: Zhiru Xie
+ * Student Id: 041143904
+ * Professor Name: Teddy Yap
  */
 package ZhiruXie.DataAccessLayer;
 

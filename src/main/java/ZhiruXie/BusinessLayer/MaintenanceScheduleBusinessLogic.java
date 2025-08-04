@@ -1,6 +1,10 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Assessment: Project Group
+ * Course Id: CST8288 OOP with Design Patterns
+ * Section: 012
+ * Student Name: Zhiru Xie
+ * Student Id: 041143904
+ * Professor Name: Teddy Yap
  */
 package ZhiruXie.BusinessLayer;
 
@@ -26,15 +30,15 @@ public class MaintenanceScheduleBusinessLogic {
         return dao.getSingleById(userId, scheduleId);
     }
 
-    public boolean add(int userId, MaintenanceScheduleDTO schedule) {
-        return dao.add(userId, schedule);
+    public boolean add(MaintenanceScheduleDTO schedule) {
+        return dao.add(schedule);
     }
 
-    public boolean update(int userId, MaintenanceScheduleDTO schedule) {
-        return dao.update(userId, schedule);
+    public boolean update(MaintenanceScheduleDTO schedule) {
+        return dao.update(schedule);
     }
 
-    public boolean delete(int userId, int scheduleId) {
-        return dao.delete(userId, scheduleId);
+    public boolean delete(int scheduleId) {
+        return dao.delete(scheduleId);
     }
 }

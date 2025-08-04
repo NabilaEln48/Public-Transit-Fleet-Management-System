@@ -116,3 +116,9 @@ form button:hover {
 .return-btn:hover {
   background-color: #2980b9;
 }
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 4px;
+}

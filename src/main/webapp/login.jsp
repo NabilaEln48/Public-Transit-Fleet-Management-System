@@ -1,12 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %>
-<!--
-    Author       : Nabila Msiah 041146732
-    Course       : CST8288 - Group Project - Authentication Module (Nabila Msiah Part)
-    Description  : Login page for users of the Public Transit Fleet Management System.
-                   Submits login credentials to the AuthServlet with action=login.
--->
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +8,11 @@
     <title>Login - Public Transit Fleet Management System</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -25,17 +20,17 @@
         }
 
         .login-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #1e1e1e;
             padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             width: 400px;
         }
 
         h1 {
-            color: #2c3e50;
-            margin-top: 0;
             text-align: center;
+            color: #61dafb;
+            margin-bottom: 30px;
         }
 
         .form-group {
@@ -44,47 +39,54 @@
 
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #7f8c8d;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #dddddd;
         }
 
         input[type="email"],
         input[type="password"] {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #444;
+            background-color: #2c2c2c;
+            color: #ffffff;
             border-radius: 4px;
             box-sizing: border-box;
         }
 
+        input:focus {
+            outline: none;
+            border-color: #61dafb;
+        }
+
         .btn {
-            display: inline-block;
             background-color: #3498db;
             color: white;
-            padding: 12px 24px;
-            text-decoration: none;
+            padding: 12px;
+            width: 100%;
+            border: none;
             border-radius: 4px;
             font-weight: bold;
-            border: none;
             cursor: pointer;
-            width: 100%;
         }
 
         .btn:hover {
             background-color: #2980b9;
         }
 
-        .error {
-            color: red;
-            margin-bottom: 15px;
+        .error, .success {
             text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .error {
+            color: #e74c3c;
         }
 
         .success {
-            color: green;
-            margin-bottom: 15px;
-            text-align: center;
+            color: #2ecc71;
         }
 
         .register-link {
@@ -93,7 +95,7 @@
         }
 
         .register-link a {
-            color: #3498db;
+            color: #61dafb;
             text-decoration: none;
         }
 
@@ -131,7 +133,7 @@
     </form>
 
     <div class="register-link">
-        <p>Don't have an account? 
+        <p>Don't have an account?
             <a href="${pageContext.request.contextPath}/controller?action=showRegister">Register</a>
         </p>
     </div>

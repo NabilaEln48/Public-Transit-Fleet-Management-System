@@ -1,6 +1,10 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ * Assessment: Project Group
+ * Course Id: CST8288 OOP with Design Patterns
+ * Section: 012
+ * Student Name: Zhiru Xie
+ * Student Id: 041143904
+ * Professor Name: Teddy Yap
  */
 package ZhiruXie.DataAccessLayer;
 
@@ -30,26 +34,23 @@ public interface MaintenanceScheduleDAO {
     /**
      * Insert
      * User the constructor without id
-     * @param userId
      * @param schedule
      * @return
      */
-    boolean add(int userId, MaintenanceScheduleDTO schedule);
+    boolean add(MaintenanceScheduleDTO schedule);
     
     /**
      * Update
      * Use the constructor with id
-     * @param userId
      * @param schedule
      * @return
      */
-    boolean update(int userId, MaintenanceScheduleDTO schedule);
+    boolean update(MaintenanceScheduleDTO schedule);
     
     /**
      * Delete
-     * @param userId
      * @param scheduleId
      * @return
      */
-    boolean delete(int userId, int scheduleId);
+    boolean delete(int scheduleId);
 }

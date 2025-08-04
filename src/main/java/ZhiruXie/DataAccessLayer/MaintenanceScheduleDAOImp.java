@@ -1,6 +1,10 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Assessment: Project Group
+ * Course Id: CST8288 OOP with Design Patterns
+ * Section: 012
+ * Student Name: Zhiru Xie
+ * Student Id: 041143904
+ * Professor Name: Teddy Yap
  */
 package ZhiruXie.DataAccessLayer;
 
@@ -82,10 +86,10 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
     }
 
     @Override
-    public boolean add(int userId, MaintenanceScheduleDTO schedule) {
+    public boolean add(MaintenanceScheduleDTO schedule) {
         String sql = "INSERT INTO ptfms_db.maintenance_schedule "
                 + "(component_ref, vehicle_ref, task_description, planned_date, progress_status, assigned_technician) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, 'Scheduled', ?)";
         try (
             Connection con = DataSource.getConnection("cst8288", "cst8288");
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -94,8 +98,7 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
             pstmt.setString(2, schedule.getVehicleId());
             pstmt.setString(3, schedule.getTaskDescription());
             pstmt.setDate(4, java.sql.Date.valueOf(schedule.getPlannedDate()));
-            pstmt.setString(5, schedule.getProgressStatus().name());
-            pstmt.setInt(6, userId); // assigned technician is the logged-in user
+            pstmt.setInt(5, schedule.getTechnicianId()); // assigned technician is the logged-in user
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -104,11 +107,11 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
     }
 
     @Override
-    public boolean update(int userId, MaintenanceScheduleDTO schedule) {
+    public boolean update(MaintenanceScheduleDTO schedule) {
         String sql = "UPDATE ptfms_db.maintenance_schedule "
                 + "SET component_ref = ?, vehicle_ref = ?, task_description = ?, "
-                + "planned_date = ?, progress_status = ? "
-                + "WHERE id = ? AND assigned_technician = ?";
+                + "planned_date = ?, progress_status = ?, assigned_technician = ? "
+                + "WHERE id = ?";
         try (
             Connection con = DataSource.getConnection("cst8288", "cst8288");
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -118,8 +121,8 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
             pstmt.setString(3, schedule.getTaskDescription());
             pstmt.setDate(4, java.sql.Date.valueOf(schedule.getPlannedDate()));
             pstmt.setString(5, schedule.getProgressStatus().name());
-            pstmt.setInt(6, schedule.getId());
-            pstmt.setInt(7, userId);
+            pstmt.setInt(6, schedule.getTechnicianId());
+            pstmt.setInt(7, schedule.getId());
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -128,14 +131,13 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
     }
 
     @Override
-    public boolean delete(int userId, int scheduleId) {
-        String sql = "DELETE FROM ptfms_db.maintenance_schedule WHERE id = ? AND assigned_technician = ?";
+    public boolean delete(int scheduleId) {
+        String sql = "DELETE FROM ptfms_db.maintenance_schedule WHERE id = ?";
         try (
             Connection con = DataSource.getConnection("cst8288", "cst8288");
             PreparedStatement pstmt = con.prepareStatement(sql);
         ) {
             pstmt.setInt(1, scheduleId);
-            pstmt.setInt(2, userId);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());

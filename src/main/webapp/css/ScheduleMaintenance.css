@@ -1,0 +1,98 @@
+body {
+  background-color: #121212;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.form-container {
+  background-color: #2a2a2a; /* lighter than before for higher contrast */
+  padding: 25px;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 50px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9); /* slightly stronger shadow */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input fields default state */
+input[type="text"],
+input[type="date"],
+textarea {
+  background-color: #2a2a2a; /* default dark grey */
+  color: #ffffff;
+  border: 2px solid #555;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Input fields focus state */
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+  background-color: #3a3a3a; /* lighter when focused */
+  border-color: #1e90ff; /* blue border on focus */
+  outline: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+button,
+.return-btn {
+  display: block;
+  width: 100%; /* ✅ Make Return same width as submit */
+  padding: 10px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.return-btn {
+  background-color: #555;
+  color: white;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.return-btn:hover {
+  background-color: #777;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.success-message {
+  color: lime;
+  font-size: 0.9em;
+  margin-top: 10px;
+}
