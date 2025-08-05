@@ -20,9 +20,32 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.sql.Connection;
 
+/**
+ * {@code AuthServlet} handles both login and registration operations for the
+ * application.
+ * <p>
+ * Depending on the "action" parameter received from the form, it either:
+ * <ul>
+ * <li>Registers a new user (with password hashing)</li>
+ * <li>Authenticates an existing user</li>
+ * <li>Displays the registration form</li>
+ * </ul>
+ * <p>
+ * The servlet connects to the database through a JDBC {@link DataSource}
+ * singleton
+ * and delegates user logic to {@link UserDAOImpl}.
+ */
 @WebServlet("/auth")
 public class AuthServlet extends HttpServlet {
 
+    /**
+     * Handles all POST requests including login, registration, and form rendering.
+     *
+     * @param request  the HTTP request object containing form data
+     * @param response the HTTP response object for redirecting or forwarding
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,10 +53,16 @@ public class AuthServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         try (Connection conn = DataSource.getInstance().getConnection()) {
-
             UserDAO dao = new UserDAOImpl(conn);
 
             // ---------- Registration ----------
+            /**
+             * Handles user registration:
+             * - Validates input fields
+             * - Hashes the password
+             * - Creates a UserDTO
+             * - Inserts the user into the database
+             */
             if ("register".equalsIgnoreCase(action)) {
                 String name = request.getParameter("name");
                 String email = request.getParameter("email");
@@ -62,6 +91,14 @@ public class AuthServlet extends HttpServlet {
             }
 
             // ---------- Login ----------
+            /**
+             * Handles user login:
+             * - Validates input
+             * - Hashes password
+             * - Authenticates user via DAO
+             * - Sets session attributes
+             * - Redirects based on user role
+             */
             else if ("login".equalsIgnoreCase(action)) {
                 String email = request.getParameter("email");
                 String password = request.getParameter("password");
@@ -94,6 +131,9 @@ public class AuthServlet extends HttpServlet {
             }
 
             // ---------- Show Register Form ----------
+            /**
+             * Forwards the user to the registration form.
+             */
             else if ("showRegister".equalsIgnoreCase(action)) {
                 request.getRequestDispatcher("/register.jsp").forward(request, response);
             }
@@ -105,6 +145,12 @@ public class AuthServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Hashes the given password using SHA-256 encryption.
+     *
+     * @param password the raw password
+     * @return hashed password as a hexadecimal string
+     */
     private String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
