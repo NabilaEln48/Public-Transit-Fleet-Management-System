@@ -26,15 +26,28 @@ public class FuelEnergyLogServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<FuelEnergyLogDTO> logs = businessLogic.getAll();
-        request.setAttribute("fuelLogs", logs);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("fuel_logs.jsp");
-        dispatcher.forward(request, response);
-    }
+        String operation = request.getParameter("operation");
+
+        if ("editForm".equalsIgnoreCase(operation)) {
+            // Show edit form
+            int id = Integer.parseInt(request.getParameter("id"));
+            FuelEnergyLogDTO log = businessLogic.getById(id);
+            request.setAttribute("log", log);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("edit_fuel_log.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            // Default - show all logs
+            List<FuelEnergyLogDTO> logs = businessLogic.getAll();
+            request.setAttribute("fuelLogs", logs);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("fuel_logs.jsp");
+            dispatcher.forward(request, response);
+        }
+    }   
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String role = (String) request.getSession().getAttribute("role");
+        String role = (String) request.getSession().getAttribute("userType");
         String operation = request.getParameter("operation");
 
         if ("add".equalsIgnoreCase(operation)) {
@@ -63,4 +76,6 @@ public class FuelEnergyLogServlet extends HttpServlet {
 
         response.sendRedirect(request.getContextPath() + "/FuelEnergyLogServlet");
     }
+    
+    
 }

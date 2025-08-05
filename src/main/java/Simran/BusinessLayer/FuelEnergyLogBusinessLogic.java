@@ -19,6 +19,9 @@ public class FuelEnergyLogBusinessLogic {
     public List<FuelEnergyLogDTO> getAll() {
         return dao.getAll();
     }
+     public FuelEnergyLogDTO getById(int id) {
+        return dao.getById(id);
+    }
 
     public boolean add(FuelEnergyLogDTO log, String role) {
         if (!"OPERATOR".equalsIgnoreCase(role)) return false;
