@@ -9,7 +9,7 @@
 <%@ page import="Simran.transferobject.FuelEnergyLogDTO" %>
 
 <%
-    String role = (String) session.getAttribute("userType"); // match login session
+    String role = (String) session.getAttribute("userType");
     List<FuelEnergyLogDTO> logs = (List<FuelEnergyLogDTO>) request.getAttribute("fuelLogs");
     if (logs == null) logs = Collections.emptyList();
 %>
@@ -39,11 +39,15 @@
 
 <table>
 <tr>
-    <th>ID</th><th>Vehicle Ref</th><th>Energy Type</th><th>Quantity Used</th><th>KM Covered</th><th>Recorded At</th>
+    <th>ID</th><th>Vehicle Ref</th><th>Energy Type</th>
+    <th>Quantity Used</th><th>KM Covered</th><th>Recorded At</th>
     <% if ("OPERATOR".equalsIgnoreCase(role)) { %><th>Actions</th><% } %>
 </tr>
+
 <% if (logs.isEmpty()) { %>
-<tr><td colspan="<%= "OPERATOR".equalsIgnoreCase(role) ? 7 : 6 %>">No logs found</td></tr>
+<tr>
+    <td colspan="<%= "OPERATOR".equalsIgnoreCase(role) ? 7 : 6 %>">No logs found</td>
+</tr>
 <% } else { 
    for (FuelEnergyLogDTO log : logs) { %>
 <tr>
@@ -53,21 +57,20 @@
     <td><%= log.getQuantityUsed() %></td>
     <td><%= log.getKmCovered() %></td>
     <td><%= log.getRecordedAt() %></td>
+
     <% if ("OPERATOR".equalsIgnoreCase(role)) { %>
     <td>
+        <!-- DELETE -->
         <form method="post" action="<%= request.getContextPath() %>/FuelEnergyLogServlet" style="display:inline;">
             <input type="hidden" name="operation" value="delete"/>
             <input type="hidden" name="id" value="<%= log.getId() %>"/>
             <button type="submit" class="action-btn delete-btn">Delete</button>
         </form>
-        <form method="post" action="<%= request.getContextPath() %>/FuelEnergyLogServlet" style="display:inline;">
-            <input type="hidden" name="operation" value="update"/>
+
+        <!-- EDIT (GET request) -->
+        <form method="get" action="<%= request.getContextPath() %>/FuelEnergyLogServlet" style="display:inline;">
+            <input type="hidden" name="operation" value="editForm"/>
             <input type="hidden" name="id" value="<%= log.getId() %>"/>
-            <input type="hidden" name="vehicle_ref" value="<%= log.getVehicleRef() %>"/>
-            <input type="hidden" name="energy_type" value="<%= log.getEnergyType() %>"/>
-            <input type="hidden" name="quantity_used" value="<%= log.getQuantityUsed() %>"/>
-            <input type="hidden" name="km_covered" value="<%= log.getKmCovered() %>"/>
-            <input type="hidden" name="recorded_at" value="<%= log.getRecordedAt() %>"/>
             <button type="submit" class="action-btn edit-btn">Edit</button>
         </form>
     </td>

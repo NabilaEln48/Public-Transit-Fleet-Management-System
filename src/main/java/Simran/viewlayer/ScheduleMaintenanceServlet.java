@@ -1,4 +1,4 @@
-package Simran.ViewLayer;
+package Simran.viewlayer;
 
 import ZhiruXie.DataAccessLayer.MaintenanceScheduleDAO;
 import ZhiruXie.DataAccessLayer.MaintenanceScheduleDAOImp;

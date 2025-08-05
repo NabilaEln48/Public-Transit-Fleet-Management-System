@@ -5,6 +5,7 @@
 package Simran.viewlayer;
 
 import Simran.BusinessLayer.FuelEnergyLogBusinessLogic;
+import Simran.alerts.DatabaseAlertObserver;
 import Simran.transferobject.FuelEnergyLogDTO;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -24,6 +25,11 @@ public class FuelEnergyLogServlet extends HttpServlet {
 
     private final FuelEnergyLogBusinessLogic businessLogic = new FuelEnergyLogBusinessLogic();
 
+    @Override
+    public void init() throws ServletException {
+        businessLogic.registerObserver(new DatabaseAlertObserver());
+    }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String operation = request.getParameter("operation");
