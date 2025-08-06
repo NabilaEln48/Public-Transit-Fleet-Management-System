@@ -60,6 +60,7 @@ Help write Use Case for FR-01 (User Auth)
 **Key Deliverables:**
 - `FuelServlet.java`, `MaintenanceServlet.java`
 - `FuelDAO.java`, `MaintenanceDAO.java`
+- database.sql 
 - Alert and monitoring logic
 
 ---
@@ -78,6 +79,7 @@ Help write Use Case for FR-01 (User Auth)
 - `DashboardServlet.java`
 - `OperatorPerformanceDAO.java`
 - `VehicleServlet.java`, `VehicleDAO.java`, `VehicleDAOImpl.java`
+- databse.sql
 - Helped in Maintenance
   
 - JUnit test suite
