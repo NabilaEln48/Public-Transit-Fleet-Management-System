@@ -29,6 +29,7 @@ public class PerformanceDTO {
     private double fuelSpent;
     private int passengerNumber;
     
+    public PerformanceDTO(){}
     public PerformanceDTO(int id){this.id = id;}
     public PerformanceDTO(
             int operatorId,
@@ -108,7 +109,7 @@ public class PerformanceDTO {
         return this.startTime;
     }
     
-    public void setRouteName(LocalDateTime startTime){
+    public void setStartTime(LocalDateTime startTime){
         this.startTime = startTime;
     }
     
@@ -162,6 +163,10 @@ public class PerformanceDTO {
     
     public double getFuelSpent(){
         return this.fuelSpent;
+    }
+    
+    public void setId(int id){
+        this.id = id;
     }
     
     public void setFuelSpent(double fuelSpent){

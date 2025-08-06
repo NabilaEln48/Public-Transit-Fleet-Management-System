@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ZhiruXie.Utility.PerformanceDTOBuilder;
+
 /**
  *
  * @author 61963
@@ -33,21 +35,21 @@ public class PerformanceDAOImp implements PerformanceDAO{
             performanceRecords = new ArrayList<>();
             try(ResultSet rs = pstmt.executeQuery()){
                 while (rs.next()) {
-                        PerformanceDTO performanceRecord = new PerformanceDTO(
-                        rs.getInt("id"),
-                        rs.getInt("operator_ref"),
-                        rs.getString("vehicle_ref"),
-                        rs.getString("route_name"),
-                        rs.getTimestamp("start_time").toLocalDateTime(),
-                        rs.getTimestamp("end_time").toLocalDateTime(),
-                        rs.getTimestamp("scheduled_start").toLocalDateTime(),
-                        rs.getBoolean("on_time_flag"),
-                        rs.getDouble("distance_km"),
-                        rs.getInt("trip_length"),
-                        rs.getInt("idle_minutes"),
-                        rs.getDouble("fuel_spent"),
-                        rs.getInt("passengers")
-                    );
+                    PerformanceDTO performanceRecord = new PerformanceDTOBuilder()
+                        .id(rs.getInt("id"))
+                        .operatorId(rs.getInt("operator_ref"))
+                        .vehicleId(rs.getString("vehicle_ref"))
+                        .routeName(rs.getString("route_name"))
+                        .startTime(rs.getTimestamp("start_time").toLocalDateTime())
+                        .endTime(rs.getTimestamp("end_time").toLocalDateTime())
+                        .scheduledStartTime(rs.getTimestamp("scheduled_start").toLocalDateTime())
+                        .onTime(rs.getBoolean("on_time_flag"))
+                        .distance(rs.getDouble("distance_km"))
+                        .usedTime(rs.getInt("trip_length"))
+                        .idleTime(rs.getInt("idle_minutes"))
+                        .fuelSpent(rs.getDouble("fuel_spent"))
+                        .passengerNumber(rs.getInt("passengers"))
+                        .buildComplete(); // Build with all fields
                     performanceRecords.add(performanceRecord);
                 }
             }
@@ -65,7 +67,6 @@ public class PerformanceDAOImp implements PerformanceDAO{
     public PerformanceDTO getSingleById(int userId, int scheduleId) {
         String sql = "SELECT * FROM ptfms_db.trip_records WHERE operator_ref = ? AND id = ?";
         PerformanceDTO performance = null;
-
         try (
             Connection con = DataSource.getConnection("cst8288", "cst8288");
             PreparedStatement pstmt = con.prepareStatement(sql)
@@ -108,7 +109,6 @@ public class PerformanceDAOImp implements PerformanceDAO{
             pstmt.setInt(10, performance.getIdleTime());
             pstmt.setDouble(11, performance.getFuelSpent());
             pstmt.setInt(12, performance.getPassengerNumber());
-
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
