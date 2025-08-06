@@ -44,7 +44,7 @@ public interface PerformanceDAO {
      * Update
      * Use the constructor with id
      * @param userId
-     * @param schedule
+     * @param performance
      * @return
      */
     boolean update(int userId, PerformanceDTO performance);
@@ -52,8 +52,8 @@ public interface PerformanceDAO {
     /**
      * Delete
      * @param userId
-     * @param scheduleId
+     * @param recordId
      * @return
      */
-    boolean delete(int userId, int scheduleId);
+    boolean delete(int userId, int recordId);
 }

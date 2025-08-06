@@ -8,12 +8,15 @@
  */
 package ZhiruXie.ControllerLayer;
 
+import ZhiruXie.BusinessLayer.VehicleBusinessLogic;
 import ZhiruXie.BusinessLayer.AnalyticsReportBusinessLogic;
 import ZhiruXie.BusinessLayer.MaintenanceScheduleBusinessLogic;
 import ZhiruXie.BusinessLayer.PerformanceBusinessLogic;
 import ZhiruXie.DTO.CostAnalysisDTO;
 import ZhiruXie.DTO.MaintenanceScheduleDTO;
 import ZhiruXie.DTO.PerformanceDTO;
+import ZhiruXie.DTO.VehicleDTO;
+import ZhiruXie.Utility.SimpleBusinessLogicFactory;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -31,6 +34,7 @@ public class FrontendController extends HttpServlet{
     private final MaintenanceScheduleBusinessLogic scheduleBusinessLogic = new MaintenanceScheduleBusinessLogic();
     private final PerformanceBusinessLogic performanceBusinessLogic = new PerformanceBusinessLogic();
     private final AnalyticsReportBusinessLogic analysisBusinessLogic = new AnalyticsReportBusinessLogic();
+    private final VehicleBusinessLogic vehicleBusinessLogic = new VehicleBusinessLogic();
     /** Target url for new web page. */
     private String targetUrl;
     
@@ -87,7 +91,7 @@ public class FrontendController extends HttpServlet{
                         request.setAttribute("errorMessage", "Invalid Technician Id. Please enter a number.");
                     }
                 }
-                List<MaintenanceScheduleDTO> schedules = scheduleBusinessLogic.getAll(technicianId);
+                List<MaintenanceScheduleDTO> schedules = SimpleBusinessLogicFactory.getBusinessLogic("maintenance").getAll(technicianId);
                 request.setAttribute("schedules", schedules);
             }
             case "PerformanceDashboard" -> {
@@ -105,16 +109,46 @@ public class FrontendController extends HttpServlet{
                         request.setAttribute("errorMessage", "Invalid Operator ID. Please enter a number.");
                     }
                 }
-                List<PerformanceDTO> performanceRecords = performanceBusinessLogic.getAll(operatorId);
+                List<PerformanceDTO> performanceRecords = SimpleBusinessLogicFactory.getBusinessLogic("performance").getAll(operatorId);
                 request.setAttribute("performanceRecords", performanceRecords);
             }
             case "CostReports" -> {
-                List<CostAnalysisDTO> analysisRecords = analysisBusinessLogic.getAll();
+                List<CostAnalysisDTO> analysisRecords = SimpleBusinessLogicFactory.getBusinessLogic("analytics").getAll();
                 request.setAttribute("AnalysisRecords", analysisRecords);
             }
-            case "ScheduleMaintenance" -> {
-                
+            case "ScheduleMaintenance" -> {}
+            case "GetVehicle" -> {
+                String vehicleIdParam = request.getParameter("vehicleId");
+                try {
+                    if (vehicleIdParam != null && !vehicleIdParam.trim().isEmpty()) {
+                        // Fetch single vehicle
+                        VehicleDTO vehicle = (VehicleDTO)SimpleBusinessLogicFactory.getBusinessLogic("vehicle").getSingleById(vehicleIdParam);
+                        if (vehicle != null) {
+                            request.setAttribute("vehicles", List.of(vehicle)); // wrap in list for consistency
+                        } else {
+                            request.setAttribute("vehicles", List.of()); // empty list
+                            request.setAttribute("errorMessage", "No vehicle found with ID: " + vehicleIdParam);
+                        }
+                    } else {
+                        // Fetch all vehicles
+                        request.setAttribute("vehicles", vehicleBusinessLogic.getAll());
+                    }
+                } catch (Exception e) {
+                    request.setAttribute("vehicles", List.of());
+                    request.setAttribute("errorMessage", "Error fetching vehicles: " + e.getMessage());
+                }
             }
+            case "AddVehicle" -> {}
+            case "UpdateVehicle" -> {}
+            case "DeleteVehicle" -> {}
+            case "FuelLogs" -> {
+               response.sendRedirect(request.getContextPath() + "/FuelEnergyLogServlet");
+               return false; // Prevent default forwarding
+           }
+           case "ViewAlerts" -> {
+               response.sendRedirect(request.getContextPath() + "/AlertServlet");
+               return false; // Prevent default forwarding
+           }
         }
         return true;
     }

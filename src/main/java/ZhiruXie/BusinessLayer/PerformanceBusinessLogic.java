@@ -17,28 +17,33 @@ import java.util.List;
  *
  * @author 61963
  */
-public class PerformanceBusinessLogic {
+public class PerformanceBusinessLogic implements BusinessLogic<PerformanceDTO> {
     private PerformanceDAO dao = null;
     
     public PerformanceBusinessLogic() {dao = new PerformanceDAOImp();}
     
-    public List<PerformanceDTO> getAll(int operatorId) {
-        return dao.getAll(operatorId);
+    @Override    
+    public List<PerformanceDTO> getAll(int... params) {
+        return dao.getAll(params[0]);
     }
 
-    public PerformanceDTO getSingleById(int operatorId, int recordId) {
-        return dao.getSingleById(operatorId, recordId);
+    @Override
+    public PerformanceDTO getSingleById(Object... params) {
+        return dao.getSingleById((int)params[0], (int)params[1]);
     }
 
-    public boolean add(int operatorId, PerformanceDTO record) {
-        return dao.add(operatorId, record);
+    @Override
+    public boolean add(Object... params) {
+        return dao.add((int)params[0], (PerformanceDTO)params[1]);
     }
 
-    public boolean update(int operatorId, PerformanceDTO record) {
-        return dao.update(operatorId, record);
+    @Override
+    public boolean update(Object... params) {
+        return dao.update((int)params[0], (PerformanceDTO)params[1]);
     }
 
-    public boolean delete(int operatorId, int scheduleId) {
-        return dao.delete(operatorId, scheduleId);
+    @Override
+    public boolean delete(Object... params) {
+        return dao.delete((int)params[0], (int)params[1]);
     }
 }

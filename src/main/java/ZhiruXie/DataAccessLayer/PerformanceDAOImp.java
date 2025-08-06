@@ -142,7 +142,6 @@ public class PerformanceDAOImp implements PerformanceDAO{
             pstmt.setInt(11, performance.getPassengerNumber());
             pstmt.setInt(12, performance.getId());
             pstmt.setInt(13, userId);
-
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());

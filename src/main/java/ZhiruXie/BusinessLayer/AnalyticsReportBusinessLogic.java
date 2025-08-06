@@ -17,28 +17,33 @@ import java.util.List;
  *
  * @author 61963
  */
-public class AnalyticsReportBusinessLogic {
+public class AnalyticsReportBusinessLogic implements BusinessLogic<CostAnalysisDTO> {
     private CostAnalysisDAO dao = null;
     
     public AnalyticsReportBusinessLogic() {dao = new CostAnalysisDAOImp();}
     
-    public List<CostAnalysisDTO> getAll() {
+    @Override
+    public List<CostAnalysisDTO> getAll(int... params) {
         return dao.getAll();
     }
 
-    public CostAnalysisDTO getSingleById(int recordId) {
-        return dao.getSingleById(recordId);
+    @Override
+    public CostAnalysisDTO getSingleById(Object... params) {
+        return dao.getSingleById((int)params[0]);
     }
 
-    public boolean add(CostAnalysisDTO record) {
-        return dao.add(record);
+    @Override
+    public boolean add(Object... params) {
+        return dao.add((CostAnalysisDTO)params[0]);
     }
 
-    public boolean update(CostAnalysisDTO updatedRecord) {
-        return dao.update(updatedRecord);
+    @Override
+    public boolean update(Object... params) {
+        return dao.update((CostAnalysisDTO)params[0]);
     }
 
-    public boolean delete(int recordId) {
-        return dao.delete(recordId);
+    @Override
+    public boolean delete(Object... params) {
+        return dao.delete((int)params[0]);
     }
 }

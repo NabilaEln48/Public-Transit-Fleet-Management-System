@@ -1,13 +1,15 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package ZhiruXie.BusinessLayer;
 
-/**
- *
- * @author 61963
- */
-public class BusinessLogic {
-    
+import java.util.List;
+
+public interface BusinessLogic<T> {
+    List<T> getAll(int... params);
+    T getSingleById(Object... params);
+    boolean add(Object... params);
+    boolean update(Object... params);
+    boolean delete(Object... params);
 }

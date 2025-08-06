@@ -15,7 +15,7 @@ CREATE TABLE user (
 -- Vehicles Table: Transit vehicle metadata (Feature Ref: FR-02)
 CREATE TABLE transit_vehicles (
     id VARCHAR(50) PRIMARY KEY,
-    category ENUM('Diesel Bus', 'Electric Light Rail', 'Diesel-Electric Train') NOT NULL,
+    category ENUM('DieselBus', 'ElectricLightRail', 'DieselElectricTrain') NOT NULL,
     registration_number VARCHAR(50) UNIQUE NOT NULL,
     fuel_used VARCHAR(50) NOT NULL,
     efficiency_rate DOUBLE NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE station_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     vehicle_ref VARCHAR(50) NOT NULL,
     station_ref VARCHAR(50) NOT NULL,
-    action_type ENUM('ARRIVAL', 'DEPARTURE') NOT NULL,
+    action_type VARCHAR(30) NOT NULL,
     logged_time VARCHAR(50) NOT NULL,
     FOREIGN KEY (vehicle_ref) REFERENCES transit_vehicles(id),
     FOREIGN KEY (station_ref) REFERENCES route_stations(id)
@@ -148,9 +148,9 @@ INSERT INTO user (name, email, password, role) VALUES
 
 -- Sample Vehicles
 INSERT INTO transit_vehicles (id, category, registration_number, fuel_used, efficiency_rate, capacity, assigned_route, operational_state) VALUES
-('BUS001', 'Diesel Bus', 'B123', 'Diesel', 0.5, 50, 'Route A', 'Active'),
-('RAIL001', 'Electric Light Rail', 'R456', 'Electricity', 2.0, 100, 'Route B', 'Active'),
-('TRAIN001', 'Diesel-Electric Train', 'T789', 'Diesel', 1.5, 200, 'Route C', 'Maintenance');
+('BUS001', 'DieselBus', 'B123', 'Diesel', 0.5, 50, 'Route A', 'Active'),
+('RAIL001', 'ElectricLightRail', 'R456', 'Electricity', 2.0, 100, 'Route B', 'Active'),
+('TRAIN001', 'DieselElectricTrain', 'T789', 'Diesel', 1.5, 200, 'Route C', 'Maintenance');
 
 -- Sample GPS logs
 INSERT INTO live_tracking (vehicle_ref, gps_lat, gps_lng, recorded_at, linked_station) VALUES
@@ -197,7 +197,6 @@ INSERT INTO analytics_reports (report_category, report_payload, created_at) VALU
 ('Fuel Usage', 'RAIL001: 50kWh', '2025-03-28 17:00:00'),
 ('Maintenance Cost', 'BUS001: $500', '2025-03-31 12:00:00'),
 ('Maintenance Cost', 'RAIL001: $2000', '2025-03-31 12:00:00');
-
 
 -- Customized
 -- Maintenance Task 1: BUS001 - Brakes (Completed)

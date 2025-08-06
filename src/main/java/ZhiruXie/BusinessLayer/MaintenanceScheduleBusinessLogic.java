@@ -17,28 +17,33 @@ import java.util.List;
  *
  * @author 61963
  */
-public class MaintenanceScheduleBusinessLogic {
+public class MaintenanceScheduleBusinessLogic  implements BusinessLogic<MaintenanceScheduleDTO> {
     private MaintenanceScheduleDAO dao = null;
     
     public MaintenanceScheduleBusinessLogic() {dao = new MaintenanceScheduleDAOImp();}
-    
-    public List<MaintenanceScheduleDTO> getAll(int userId) {
-        return dao.getAll(userId);
+
+    @Override
+    public List<MaintenanceScheduleDTO> getAll(int... params) {
+        return dao.getAll(params[0]);
     }
 
-    public MaintenanceScheduleDTO getSingleById(int userId, int scheduleId) {
-        return dao.getSingleById(userId, scheduleId);
+    @Override
+    public MaintenanceScheduleDTO getSingleById(Object... params) {
+        return dao.getSingleById((int)params[0], (int)params[1]);
     }
 
-    public boolean add(MaintenanceScheduleDTO schedule) {
-        return dao.add(schedule);
+    @Override
+    public boolean add(Object... params) {
+        return dao.add((MaintenanceScheduleDTO)params[0]);
     }
 
-    public boolean update(MaintenanceScheduleDTO schedule) {
-        return dao.update(schedule);
+    @Override
+    public boolean update(Object... params) {
+        return dao.update((MaintenanceScheduleDTO)params[0]);
     }
 
-    public boolean delete(int scheduleId) {
-        return dao.delete(scheduleId);
+    @Override
+    public boolean delete(Object... params) {
+        return dao.delete((int)params[0]);
     }
 }

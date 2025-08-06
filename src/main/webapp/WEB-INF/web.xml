@@ -33,6 +33,34 @@
         <servlet-name>ScheduleMaintenanceServlet</servlet-name>
         <servlet-class>Simran.ViewLayer.ScheduleMaintenanceServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VehicleManagementServlet</servlet-name>
+        <servlet-class>ZhiruXie.DataAccessLayer.VehicleManagementServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetVehicleServlet</servlet-name>
+        <servlet-class>ZhiruXie.DataAccessLayer.GetVehicleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddVehicleServlet</servlet-name>
+        <servlet-class>ZhiruXie.DataAccessLayer.AddVehicleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateVehicleServlet</servlet-name>
+        <servlet-class>ZhiruXie.DataAccessLayer.UpdateVehicleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteVehicleServlet</servlet-name>
+        <servlet-class>ZhiruXie.DataAccessLayer.DeleteVehicleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FuelEnergyLogServlet</servlet-name>
+        <servlet-class>Simran.ViewLayer.FuelEnergyLogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AlertServlet</servlet-name>
+        <servlet-class>Simran.ViewLayer.AlertServlet</servlet-class>
+    </servlet>
     <!-- Mapping -->
     <servlet-mapping>
         <servlet-name>FrontendController</servlet-name>
@@ -62,5 +90,33 @@
     <servlet-mapping>
         <servlet-name>ScheduleMaintenanceServlet</servlet-name>
         <url-pattern>/ScheduleMaintenance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VehicleManagementServlet</servlet-name>
+        <url-pattern>/VehicleManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetVehicleServlet</servlet-name>
+        <url-pattern>/GetVehicle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddVehicleServlet</servlet-name>
+        <url-pattern>/AddVehicle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateVehicleServlet</servlet-name>
+        <url-pattern>/UpdateVehicle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteVehicleServlet</servlet-name>
+        <url-pattern>/DeleteVehicle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FuelEnergyLogServlet</servlet-name>
+        <url-pattern>/FuelEnergyLogServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AlertServlet</servlet-name>
+        <url-pattern>/AlertServlet</url-pattern>
     </servlet-mapping>
 </web-app>
