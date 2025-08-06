@@ -42,8 +42,8 @@ Help write Use Case for FR-01 (User Auth)
 - Contributed to use cases and class diagrams related to vehicle and GPS modules.
 
 **Key Deliverables:**
-- `VehicleServlet.java`, `GPSLogServlet.java`, `GPSTrackingservlet`
-- `VehicleDAO.java`, `VehicleDAOImpl.java` ,`GPSLogDAO.java` , `GPSLogDAOImpl.java`
+- `GPSLogServlet.java`, `GPSTrackingservlet`
+- `GPSLogDAO.java` , `GPSLogDAOImpl.java`
 - `StationDAO.java` , `StationDAOImpl.java` ,`StationDTO.java`
 - `GPSTrackingDTO.java`, `GPSTrackingDAO.java` , `GPSTrackingDAOImpl.java`
 
@@ -77,6 +77,9 @@ Help write Use Case for FR-01 (User Auth)
 **Key Deliverables:**
 - `DashboardServlet.java`
 - `OperatorPerformanceDAO.java`
+- `VehicleServlet.java`, `VehicleDAO.java`, `VehicleDAOImpl.java`
+- Helped in Maintenance
+  
 - JUnit test suite
 - Final ERD and SQL Schema
 
