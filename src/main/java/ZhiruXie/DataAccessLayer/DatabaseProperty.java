@@ -8,9 +8,11 @@
  */
 package ZhiruXie.DataAccessLayer;
 
-/**
- *
- * @author 61963
+/** This class is responsible for providing the necessary details for accessing the database.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.DataAccessLayer
  */
 public class DatabaseProperty {
     /** The url of the database. */

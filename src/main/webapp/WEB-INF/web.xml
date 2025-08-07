@@ -35,23 +35,23 @@
     </servlet>
     <servlet>
         <servlet-name>VehicleManagementServlet</servlet-name>
-        <servlet-class>ZhiruXie.DataAccessLayer.VehicleManagementServlet</servlet-class>
+        <servlet-class>ZhiruXie.ViewLayer.VehicleManagementServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetVehicleServlet</servlet-name>
-        <servlet-class>ZhiruXie.DataAccessLayer.GetVehicleServlet</servlet-class>
+        <servlet-class>ZhiruXie.ViewLayer.GetVehicleServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddVehicleServlet</servlet-name>
-        <servlet-class>ZhiruXie.DataAccessLayer.AddVehicleServlet</servlet-class>
+        <servlet-class>ZhiruXie.ViewLayer.AddVehicleServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateVehicleServlet</servlet-name>
-        <servlet-class>ZhiruXie.DataAccessLayer.UpdateVehicleServlet</servlet-class>
+        <servlet-class>ZhiruXie.ViewLayer.UpdateVehicleServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteVehicleServlet</servlet-name>
-        <servlet-class>ZhiruXie.DataAccessLayer.DeleteVehicleServlet</servlet-class>
+        <servlet-class>ZhiruXie.ViewLayer.DeleteVehicleServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FuelEnergyLogServlet</servlet-name>
@@ -60,6 +60,17 @@
     <servlet>
         <servlet-name>AlertServlet</servlet-name>
         <servlet-class>Simran.ViewLayer.AlertServlet</servlet-class>
+    </servlet>
+
+
+    <servlet>
+        <servlet-name>GPSLogServlet</servlet-name>
+        <servlet-class>Purnima.ViewLayer.GPSLogServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>GPSTrackingServlet</servlet-name>
+        <servlet-class>Purnima.ViewLayer.GPSTrackingServlet</servlet-class>
     </servlet>
     <!-- Mapping -->
     <servlet-mapping>
@@ -118,5 +129,15 @@
     <servlet-mapping>
         <servlet-name>AlertServlet</servlet-name>
         <url-pattern>/AlertServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GPSLogServlet</servlet-name>
+        <url-pattern>/GPSLogServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GPSTrackingServlet</servlet-name>
+        <url-pattern>/GPSTrackingServlet</url-pattern>
     </servlet-mapping>
 </web-app>

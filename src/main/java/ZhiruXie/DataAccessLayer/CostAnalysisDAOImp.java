@@ -16,12 +16,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author 61963
+/** This implementation class for cost analysis data access object that contains detailed logic for CRUD operations.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.DataAccessLayer
  */
 public class CostAnalysisDAOImp implements CostAnalysisDAO{
 
+    /**
+     * Get all schedules
+     * @return A list of CostAnalysisDTO records from the database
+     */
     @Override
     public List<CostAnalysisDTO> getAll() {
         String sql = "select * from ptfms_db.analytics_reports";
@@ -48,6 +54,11 @@ public class CostAnalysisDAOImp implements CostAnalysisDAO{
         return records;
     }
 
+    /**
+     * Get single schedule
+     * @param recordId The unique identifier for cost analysis report
+     * @return A single CostAnalysisDTO record from the database
+     */
     @Override
     public CostAnalysisDTO getSingleById(int recordId) {
         String sql = "SELECT * FROM ptfms_db.analytics_reports WHERE id = ?";
@@ -72,6 +83,12 @@ public class CostAnalysisDAOImp implements CostAnalysisDAO{
         return null;
     }
 
+    /**
+     * Insert a new record into the database
+     * User the constructor without id
+     * @param record A single CostAnalysisDTO record to insert into the database
+     * @return A Boolean result. true for success and false for failure
+     */
     @Override
     public boolean add(CostAnalysisDTO record) {
         String sql = "INSERT INTO ptfms_db.analytics_reports (report_category, report_payload, created_at) VALUES (?, ?, ?)";
@@ -89,6 +106,12 @@ public class CostAnalysisDAOImp implements CostAnalysisDAO{
         return false;
     }
 
+    /**
+     * Update schedule
+     * Use the constructor with id
+     * @param updatedRecord A CostAnalysisDTO record to be updated into the database
+     * @return A Boolean result. true for success and false for failure
+     */
     @Override
     public boolean update(CostAnalysisDTO updatedRecord) {
         String sql = "UPDATE ptfms_db.analytics_reports SET report_category = ?, report_payload = ?, created_at = ? WHERE id = ?";
@@ -107,6 +130,11 @@ public class CostAnalysisDAOImp implements CostAnalysisDAO{
         return false;
     }
 
+    /**
+     * Delete schedule
+     * @param recordId An id to locate the record to delete from the database
+     * @return A Boolean result. true for success and false for failure
+     */
     @Override
     public boolean delete(int recordId) {
         String sql = "DELETE FROM ptfms_db.analytics_reports WHERE id = ?";

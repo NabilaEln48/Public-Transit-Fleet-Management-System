@@ -1,7 +1,7 @@
 <%-- 
     Document   : fuel_logs
     Created on : Aug 4, 2025, 4:46:30 p.m.
-    Author     : simra
+    Author     : Prabhsimran Kaur (041119310)
 --%>
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -31,12 +31,24 @@
         .add-section { width: 90%; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; }
         .add-section input { margin: 5px; padding: 8px; width: calc(20% - 12px); }
         .add-btn { background-color: #28a745; color: white; }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 8px 16px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 <body>
 
 <h2>Fuel/Energy Logs</h2>
-
+<a href="<%= request.getContextPath() %>/operator.jsp" class="back-btn">← Go Back</a>
 <table>
 <tr>
     <th>ID</th><th>Vehicle Ref</th><th>Energy Type</th>

@@ -15,18 +15,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/** Report dashboard page view servlet.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.ViewLayer
+ */
 public class ReportDashboardServlet extends HttpServlet {
     /** Default constructor without parameters. */
     public ReportDashboardServlet() {}
 
-    /** Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods. */
+    /**Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+    * @param request servlet request
+    * @param response servlet response
+    * @throws ServletException if a servlet-specific error occurs
+    * @throws IOException if an I/O error occurs
+    */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String role = request.getSession().getAttribute("userType").toString();
-
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -47,7 +56,12 @@ public class ReportDashboardServlet extends HttpServlet {
             }
             out.println("</div>");
             out.println("</form>");
-            out.println("<button class=\"return-button\" onclick=\"location.href='manager.jsp'\">Return</button>");
+            if (role.equalsIgnoreCase("MANAGER")) {
+                out.println("<button class=\"return-button\" onclick=\"location.href='manager.jsp'\">Return</button>");
+            }else{
+                out.println("<button class=\"return-button\" onclick=\"location.href='operator.jsp'\">Return</button>");
+            }
+            
             out.println("</div>");
             // Content
 
@@ -55,19 +69,39 @@ public class ReportDashboardServlet extends HttpServlet {
             out.println("</html>");
         }
     }
-
+    
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
+    /**
+     * Provides dashboard servlet information.
+     * @return Dashboard servlet information
+     */
     @Override
     public String getServletInfo() {
         return "Report Dashboard Servlet";

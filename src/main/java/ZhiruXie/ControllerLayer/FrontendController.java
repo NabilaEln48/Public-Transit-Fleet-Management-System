@@ -8,10 +8,9 @@
  */
 package ZhiruXie.ControllerLayer;
 
+import Purnima.BusinessLayer.GPSTrackingBusinessLogic;
+import Purnima.DTO.ServiceLogDTO;
 import ZhiruXie.BusinessLayer.VehicleBusinessLogic;
-import ZhiruXie.BusinessLayer.AnalyticsReportBusinessLogic;
-import ZhiruXie.BusinessLayer.MaintenanceScheduleBusinessLogic;
-import ZhiruXie.BusinessLayer.PerformanceBusinessLogic;
 import ZhiruXie.DTO.CostAnalysisDTO;
 import ZhiruXie.DTO.MaintenanceScheduleDTO;
 import ZhiruXie.DTO.PerformanceDTO;
@@ -25,16 +24,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author 61963
+/** This class handles all Webpage requests and dispatch or redirect them to their destinations.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.ControllerLayer
  */
 public class FrontendController extends HttpServlet{
-    /** The business logic instance that are used for calling detailed logic from the DAO implementation class. */
-    private final MaintenanceScheduleBusinessLogic scheduleBusinessLogic = new MaintenanceScheduleBusinessLogic();
-    private final PerformanceBusinessLogic performanceBusinessLogic = new PerformanceBusinessLogic();
-    private final AnalyticsReportBusinessLogic analysisBusinessLogic = new AnalyticsReportBusinessLogic();
+    /** The vehicle business logic instance that are used for calling detailed logic from the DAO implementation class. */
     private final VehicleBusinessLogic vehicleBusinessLogic = new VehicleBusinessLogic();
+    /** The gps business logic instance that are used for calling detailed logic from the DAO implementation class. */
+    private final GPSTrackingBusinessLogic gpsBusinessLogic = new GPSTrackingBusinessLogic();
+
     /** Target url for new web page. */
     private String targetUrl;
     
@@ -149,6 +150,104 @@ public class FrontendController extends HttpServlet{
                response.sendRedirect(request.getContextPath() + "/AlertServlet");
                return false; // Prevent default forwarding
            }
+            case "OperatorServiceLogs" -> {
+                // Operator views their break/service logs
+                int operatorId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
+                List<ServiceLogDTO> serviceLogs = gpsBusinessLogic.getOperatorServiceLogs(operatorId);
+                request.setAttribute("serviceLogs", serviceLogs);
+                targetUrl = "service-logs.jsp";
+            }
+            case "RecordGPSLocation" -> {
+                // Record new GPS location (typically called via AJAX)
+                String vehicleId = request.getParameter("vehicleId");
+                String latStr = request.getParameter("latitude");
+                String lngStr = request.getParameter("longitude");
+                String station = request.getParameter("station");
+                
+                try {
+                    double latitude = Double.parseDouble(latStr);
+                    double longitude = Double.parseDouble(lngStr);
+                    
+                    boolean success = gpsBusinessLogic.recordGPSLocation(vehicleId, latitude, longitude, station);
+                    
+                    response.setContentType("application/json");
+                    response.getWriter().write("{\"success\": " + success + "}");
+                    return false; // Don't forward to JSP
+                } catch (NumberFormatException e) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    response.getWriter().write("{\"error\": \"Invalid coordinates\"}");
+                    return false;
+                }
+            }
+            case "LogStationEvent" -> {
+                // Log arrival or departure at station
+                String vehicleId = request.getParameter("vehicleId");
+                String stationId = request.getParameter("stationId");
+                String actionType = request.getParameter("actionType"); // ARRIVAL or DEPARTURE
+                
+                boolean success = gpsBusinessLogic.logStationEvent(vehicleId, stationId, actionType);
+                
+                if (success) {
+                    request.setAttribute("successMessage", "Station event logged successfully");
+                } else {
+                    request.setAttribute("errorMessage", "Failed to log station event");
+                }
+                
+                // Redirect back to appropriate dashboard
+                String userRole = request.getSession().getAttribute("userRole").toString();
+                if ("MANAGER".equals(userRole)) {
+                    targetUrl = "StationReports";
+                    return prepareRequest(request, response, targetUrl);
+                } else {
+                    targetUrl = "OperatorServiceLogs";
+                    return prepareRequest(request, response, targetUrl);
+                }
+            }
+            case "StartServiceLog" -> {
+                // Start break or out-of-service period
+                String vehicleId = request.getParameter("vehicleId");
+                String logType = request.getParameter("logType"); // Break or OutOfService
+                int operatorId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
+                
+                boolean success = gpsBusinessLogic.startServiceLog(vehicleId, operatorId, logType);
+                
+                if (success) {
+                    request.setAttribute("successMessage", logType + " started successfully");
+                } else {
+                    request.setAttribute("errorMessage", "Failed to start " + logType);
+                }
+                
+                targetUrl = "OperatorServiceLogs";
+                return prepareRequest(request, response, targetUrl);
+            }
+            case "EndServiceLog" -> {
+                // End break or out-of-service period
+                String logIdStr = request.getParameter("logId");
+                
+                try {
+                    int logId = Integer.parseInt(logIdStr);
+                    boolean success = gpsBusinessLogic.endServiceLog(logId);
+                    
+                    if (success) {
+                        request.setAttribute("successMessage", "Service period ended successfully");
+                    } else {
+                        request.setAttribute("errorMessage", "Failed to end service period");
+                    }
+                } catch (NumberFormatException e) {
+                    request.setAttribute("errorMessage", "Invalid log ID");
+                }
+                
+                targetUrl = "OperatorServiceLogs";
+                return prepareRequest(request, response, targetUrl);
+            }
+            case "GPSLogServlet" -> {
+                    targetUrl = "GPSLogServlet";
+                    break;
+            }
+                case "GPSTrackingServlet" -> {
+                    targetUrl = "gpslog";
+                    break;
+            }
         }
         return true;
     }

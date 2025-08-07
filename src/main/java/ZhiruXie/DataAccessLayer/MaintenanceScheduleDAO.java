@@ -11,46 +11,46 @@ package ZhiruXie.DataAccessLayer;
 import ZhiruXie.DTO.MaintenanceScheduleDTO;
 import java.util.List;
 
-/**
- *
- * @author 61963
+/** This maintenance schedule data access object that calls to its implementation class for performing CRUD operations.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.DataAccessLayer
  */
 public interface MaintenanceScheduleDAO {
     /**
-     * Get all schedules
-     * @param userId
-     * @return
+     * Get all schedule records
+     * @param userId The unique identifier for the user
+     * @return A list of MaintenanceScheduleDTO records from the database
      */
     List<MaintenanceScheduleDTO> getAll(int userId);
     
     /**
      * Get single schedule
-     * @param userId
-     * @param scheduleId
-     * @return
+     * @param userId The unique identifier for the user
+     * @param scheduleId The unique identifier for the maintenance schedule report
+     * @return A single MaintenanceScheduleDTO record from the database
      */
     MaintenanceScheduleDTO getSingleById(int userId, int scheduleId);
     
     /**
-     * Insert
-     * User the constructor without id
-     * @param schedule
-     * @return
+     * Insert a new maintenance schedule record
+     * @param schedule A new schedule DTO
+     * @return A Boolean result. true for success and false for failure
      */
     boolean add(MaintenanceScheduleDTO schedule);
     
     /**
-     * Update
-     * Use the constructor with id
-     * @param schedule
-     * @return
+     * Update an existing maintenance schedule record
+     * @param schedule Updated schedule DTO
+     * @return A Boolean result. true for success and false for failure
      */
     boolean update(MaintenanceScheduleDTO schedule);
     
     /**
-     * Delete
-     * @param scheduleId
-     * @return
+     * Delete an existing maintenance schedule record
+     * @param scheduleId Target record id
+     * @return A Boolean result. true for success and false for failure
      */
     boolean delete(int scheduleId);
 }

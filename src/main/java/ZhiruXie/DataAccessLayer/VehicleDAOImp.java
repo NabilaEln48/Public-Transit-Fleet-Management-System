@@ -1,9 +1,16 @@
+/*
+ * Assessment: Project Group
+ * Course Id: CST8288 OOP with Design Patterns
+ * Section: 012
+ * Student Name: Zhiru Xie
+ * Student Id: 041143904
+ * Professor Name: Teddy Yap
+ */
 package ZhiruXie.DataAccessLayer;
 
 import ZhiruXie.DTO.VehicleDTO;
 import ZhiruXie.enums.Enum_VehicleCategory;
 import ZhiruXie.enums.Enum_VehicleOperationalState;
-import ZhiruXie.DataAccessLayer.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,8 +18,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/** This implementation class for vehicle data access object that contains detailed logic for CRUD operations.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.DataAccessLayer
+ */
 public class VehicleDAOImp implements VehicleDAO {
 
+    /**
+     * Get all vehicles
+     * @return A list of vehicle records from the database
+     */
     @Override
     public List<VehicleDTO> getAll() {
         String sql = "SELECT * FROM ptfms_db.transit_vehicles";
@@ -39,6 +56,11 @@ public class VehicleDAOImp implements VehicleDAO {
         return vehicles;
     }
 
+    /**
+     * Get a single vehicle
+     * @param vehicleId Unique identifier for the vehicle
+     * @return A single vehicle record from the database
+     */
     @Override
     public VehicleDTO getSingleById(String vehicleId) {
         String sql = "SELECT * FROM ptfms_db.transit_vehicles WHERE id = ?";
@@ -67,6 +89,12 @@ public class VehicleDAOImp implements VehicleDAO {
         return vehicle;
     }
 
+    /**
+     * Insert a new vehicle into the database.
+     * User the constructor without id
+     * @param vehicle A new vehicle instance
+     * @return A Boolean result. true for success and false for failure
+     */
     @Override
     public boolean add(VehicleDTO vehicle) {
         String sql = "INSERT INTO ptfms_db.transit_vehicles " +
@@ -89,6 +117,12 @@ public class VehicleDAOImp implements VehicleDAO {
         }
     }
 
+    /**
+     * Update an existing vehicle from the database.
+     * Use the constructor with id
+     * @param vehicle An updated vehicle instance
+     * @return A Boolean result. true for success and false for failure
+     */
     @Override
     public boolean update(VehicleDTO vehicle) {
         String sql = "UPDATE ptfms_db.transit_vehicles SET " +
@@ -111,6 +145,11 @@ public class VehicleDAOImp implements VehicleDAO {
         }
     }
 
+    /**
+     * Delete an existing vehicle from the database.
+     * @param vehicleId Target record id
+     * @return A Boolean result. true for success and false for failure
+     */
     @Override
     public boolean delete(String vehicleId) {
         // If you have foreign keys with ON DELETE CASCADE, this is enough.

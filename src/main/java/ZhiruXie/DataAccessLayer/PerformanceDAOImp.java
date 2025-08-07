@@ -18,11 +18,18 @@ import java.util.List;
 
 import ZhiruXie.Utility.PerformanceDTOBuilder;
 
-/**
- *
- * @author 61963
+/** This implementation class for performance report data access object that contains detailed logic for CRUD operations.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.DataAccessLayer
  */
 public class PerformanceDAOImp implements PerformanceDAO{
+    /**
+     * Get all performance report
+     * @param userId
+     * @return
+     */
     @Override
     public List<PerformanceDTO> getAll(int userId) {
         String sql = "select * from ptfms_db.trip_records where operator_ref = ?";
@@ -63,6 +70,12 @@ public class PerformanceDAOImp implements PerformanceDAO{
         return performanceRecords;
     }
 
+    /**
+     * Get a single performance report
+     * @param userId
+     * @param scheduleId
+     * @return
+     */
     @Override
     public PerformanceDTO getSingleById(int userId, int scheduleId) {
         String sql = "SELECT * FROM ptfms_db.trip_records WHERE operator_ref = ? AND id = ?";
@@ -84,6 +97,12 @@ public class PerformanceDAOImp implements PerformanceDAO{
         return performance;
     }
 
+    /**
+     * Insert a new performance report into the database
+     * @param userId Unique identifier for the user
+     * @param performance Unique identifier for the performance report
+     * @return
+     */
     @Override
     public boolean add(int userId, PerformanceDTO performance) {
         String sql = """
@@ -116,6 +135,12 @@ public class PerformanceDAOImp implements PerformanceDAO{
         return false;
     }
 
+    /**
+     * Update an existing performance report from the database
+     * @param userId Unique identifier for the user
+     * @param performance Unique identifier for the performance report
+     * @return
+     */
     @Override
     public boolean update(int userId, PerformanceDTO performance) {
         String sql = """
@@ -149,15 +174,21 @@ public class PerformanceDAOImp implements PerformanceDAO{
         return false;
     }
 
+    /**
+     * Delete an existing performance report from the database
+     * @param userId Unique identifier for the user
+     * @param performanceId Unique identifier for the performance report
+     * @return
+     */
     @Override
-    public boolean delete(int userId, int scheduleId) {
+    public boolean delete(int userId, int performanceId) {
         String sql = "DELETE FROM ptfms_db.trip_records WHERE id=? AND operator_ref=?";
 
         try (
             Connection con = DataSource.getConnection("cst8288", "cst8288");
             PreparedStatement pstmt = con.prepareStatement(sql)
         ) {
-            pstmt.setInt(1, scheduleId);
+            pstmt.setInt(1, performanceId);
             pstmt.setInt(2, userId);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -168,6 +199,9 @@ public class PerformanceDAOImp implements PerformanceDAO{
 
     /**
      * Helper method to map ResultSet to PerformanceDTO
+     * @param rs Result set for the SQL execution
+     * @throw SQLException Possible SQL execution anomaly
+     * @return A performance report instance
      */
     private PerformanceDTO mapResultSetToDTO(ResultSet rs) throws SQLException {
         return new PerformanceDTO(

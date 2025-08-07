@@ -126,18 +126,16 @@ response.sendRedirect("login.jsp"); return; } %>
             <a href="${ctx}/ReportDashboard">View Reports</a>
           </div>
           <div class="card">
-            <a href="${ctx}/viewGPSLogs.jsp">View GPS Logs</a>
-          </div>
-          <div class="card">
             <a href="${ctx}/ScheduleMaintenance">Schedule Maintenance</a>
           </div>
           <div class="card">
-            <a href="${ctx}/maintenanceOverview.jsp">Maintenance Overview</a>
+            <a href="GPSTrackingServlet?action=viewServiceLogReport">View Service Log Report</a>
           </div>
           <div class="card">
-            <a href="${ctx}/fuelConsumptionSummary.jsp"
-              >Fuel Consumption Summary</a
-            >
+            <a href="GPSTrackingServlet?action=viewLiveTrackingReport">View Live Tracking Report</a>
+          </div>
+          <div class="card">
+            <a href="GPSTrackingServlet?action=viewTransitVehiclesReport">View Transit Vehicles Report</a>
           </div>
           <div class="card">
             <a href="${ctx}/FrontendController?action=ViewAlerts"

@@ -12,9 +12,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author 61963
+/** This class is responsible for providing the connection to the database.For safety consideration singleton pattern is applied.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.DataAccessLayer
  */
 public class DataSource {
     /** Unique instance used for accessing the database. */

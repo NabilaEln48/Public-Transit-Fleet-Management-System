@@ -1,13 +1,15 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Assessment: Project Group
+ * Course Id: CST8288 OOP with Design Patterns
+ * Section: 012
+ * Student Name: Zhiru Xie
+ * Student Id: 041143904
+ * Professor Name: Teddy Yap
  */
 package ZhiruXie.ViewLayer;
 
 import ZhiruXie.DTO.VehicleDTO;
 import ZhiruXie.DataAccessLayer.VehicleDAO;
-import ZhiruXie.DataAccessLayer.VehicleDAO;
-import ZhiruXie.DataAccessLayer.VehicleDAOImp;
 import ZhiruXie.DataAccessLayer.VehicleDAOImp;
 import ZhiruXie.enums.Enum_VehicleCategory;
 import ZhiruXie.enums.Enum_VehicleOperationalState;
@@ -20,15 +22,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/** Update vehicle page view servlet.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.ViewLayer
+ */
 public class UpdateVehicleServlet extends HttpServlet {
-
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        printForm(request, response, new HashMap<>(), new HashMap<>());
+        processRequest(request, response, new HashMap<>(), new HashMap<>());
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    /** Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request
+     * @param response
+     * @throws javax.servlet.ServletException
+     * @throws java.io.IOException */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -107,10 +134,17 @@ public class UpdateVehicleServlet extends HttpServlet {
         }
 
         // If errors or first load, redisplay form
-        printForm(request, response, formValues, formErrors);
+        processRequest(request, response, formValues, formErrors);
     }
 
-    private void printForm(HttpServletRequest request, HttpServletResponse response, 
+    /**Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+    * @param request servlet request
+    * @param response servlet response
+     * @param values
+     * @param errors
+    * @throws IOException if an I/O error occurs
+    */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response, 
                        Map<String, String> values, Map<String, String> errors)
         throws IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -242,10 +276,20 @@ public class UpdateVehicleServlet extends HttpServlet {
     }
 
 
+    /**
+     * Removes extra spaces from given text content.
+     * @params Raw text content
+     * @return Processed text content without extra space
+     */
     private String safeString(String value) {
         return value != null ? value.trim() : "";
     }
 
+    /**
+     * Validates of given text content is empty.
+     * @params Raw text content
+     * @return A Boolean value for validation result - true for empty and false for not
+     */
     private boolean isBlank(String value) {
         return value == null || value.trim().isEmpty();
     }

@@ -123,10 +123,7 @@ return; } %>
       <div class="section">
         <h2>Operator Actions</h2>
         <div class="card-grid">
-          <div class="card"><a href="${ctx}/logGPS.jsp">Log GPS Data</a></div>
-          <div class="card">
-            <a href="${ctx}/declareOutOfService.jsp">Declare Out-of-Service</a>
-          </div>
+          <div class="card"><a href="${ctx}/gpsLogForm.jsp">Log GPS Data</a></div>
           <div class="card">
             <a href="${ctx}/ReportDashboard">View Reports</a>
           </div>

@@ -17,12 +17,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author 61963
+/** This implementation class for cost analysis data access object that contains detailed logic for CRUD operations.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.DataAccessLayer
  */
 public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
 
+    /**
+     * Get all schedule records
+     * @param userId The unique identifier for the user
+     * @return A list of MaintenanceScheduleDTO records from the database
+     */
     @Override
     public List<MaintenanceScheduleDTO> getAll(int userId) {
         String sql = "select * from ptfms_db.maintenance_schedule where assigned_technician = ?";
@@ -57,6 +64,12 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
         return scheduleItems;
     }
 
+    /**
+     * Get single schedule
+     * @param userId The unique identifier for the user
+     * @param scheduleId The unique identifier for the maintenance schedule report
+     * @return A single MaintenanceScheduleDTO record from the database
+     */
     @Override
     public MaintenanceScheduleDTO getSingleById(int userId, int scheduleId) {
         String sql = "SELECT * FROM ptfms_db.maintenance_schedule WHERE assigned_technician = ? AND id = ?";
@@ -85,6 +98,11 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
         return null; // not found
     }
 
+    /**
+     * Insert a new maintenance schedule record
+     * @param schedule A new schedule DTO
+     * @return A Boolean result. true for success and false for failure
+     */
     @Override
     public boolean add(MaintenanceScheduleDTO schedule) {
         String sql = "INSERT INTO ptfms_db.maintenance_schedule "
@@ -106,6 +124,11 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
         return false;
     }
 
+    /**
+     * Update an existing maintenance schedule record
+     * @param schedule Updated schedule DTO
+     * @return A Boolean result. true for success and false for failure
+     */
     @Override
     public boolean update(MaintenanceScheduleDTO schedule) {
         String sql = "UPDATE ptfms_db.maintenance_schedule "
@@ -130,6 +153,11 @@ public class MaintenanceScheduleDAOImp implements MaintenanceScheduleDAO{
         return false;
     }
 
+    /**
+     * Delete an existing maintenance schedule record
+     * @param scheduleId Target record id
+     * @return A Boolean result. true for success and false for failure
+     */
     @Override
     public boolean delete(int scheduleId) {
         String sql = "DELETE FROM ptfms_db.maintenance_schedule WHERE id = ?";

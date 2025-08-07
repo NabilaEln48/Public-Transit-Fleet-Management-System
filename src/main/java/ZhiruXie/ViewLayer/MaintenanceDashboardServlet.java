@@ -17,9 +17,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author 61963
+/** Maintenance report dashboard page view servlet.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.ViewLayer
  */
 public class MaintenanceDashboardServlet extends HttpServlet{
     /** Default constructor without parameters. */

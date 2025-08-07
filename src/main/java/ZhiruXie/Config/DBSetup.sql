@@ -198,6 +198,10 @@ INSERT INTO analytics_reports (report_category, report_payload, created_at) VALU
 ('Maintenance Cost', 'BUS001: $500', '2025-03-31 12:00:00'),
 ('Maintenance Cost', 'RAIL001: $2000', '2025-03-31 12:00:00');
 
+-- Sample Stations
+INSERT INTO route_stations (id, station_name, geo_location, associated_route) VALUES
+('Station01', 'Test Station', '45.4215,-75,6972', 'Route A');
+
 -- Customized
 -- Maintenance Task 1: BUS001 - Brakes (Completed)
 INSERT INTO maintenance_schedule (component_ref, vehicle_ref, task_description, planned_date, progress_status, assigned_technician)

@@ -36,11 +36,12 @@ public class CostReportServlet extends HttpServlet{
         throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {   
+            String dashboardPage = "manager.jsp";
             List<CostAnalysisDTO> records = (List<CostAnalysisDTO>)request.getAttribute("AnalysisRecords");
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Cost Report Page</title>");  
+            out.println("<title>Cost Report Page</title>");
             out.println("<link rel='stylesheet' type='text/css' href='css/CostAnalysisDashboard.css'>");
             out.println("</head>");
             out.println("<body>");
@@ -69,6 +70,9 @@ public class CostReportServlet extends HttpServlet{
             } else {
                 out.println("<p>No cost reports available.</p>");
             }
+            out.println("<div class='return-container'>");
+            out.println("<a href='" + request.getContextPath() + "/" + dashboardPage + "' class='return-btn'>Return to Menu</a>");
+            out.println("</div>");
             //content
             out.println("</body>");
             out.println("</html>");

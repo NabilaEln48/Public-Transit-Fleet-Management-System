@@ -1,6 +1,10 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Assessment: Project Group
+ * Course Id: CST8288 OOP with Design Patterns
+ * Section: 012
+ * Student Name: Zhiru Xie
+ * Student Id: 041143904
+ * Professor Name: Teddy Yap
  */
 package ZhiruXie.Utility;
 
@@ -10,11 +14,17 @@ import ZhiruXie.BusinessLayer.MaintenanceScheduleBusinessLogic;
 import ZhiruXie.BusinessLayer.PerformanceBusinessLogic;
 import ZhiruXie.BusinessLayer.VehicleBusinessLogic;
 
-/**
- *
- * @author 61963
+/** This class is a simple factory for creating business logic instances.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.Utility
  */
 public class SimpleBusinessLogicFactory {
+    /** Create business logic instances based on input String
+     * @param type The business logic type
+     * @return An instance of the respective business logic
+    */
     public static BusinessLogic getBusinessLogic(String type) {
         return switch (type.toLowerCase()) {
             case "vehicle"     -> new VehicleBusinessLogic();

@@ -18,9 +18,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author 61963
+/** Performance report dashboard page view servlet.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.ViewLayer
  */
 public class PerformanceDashboardServlet extends HttpServlet{
     /** Default constructor without parameters. */
