@@ -1,0 +1,50 @@
+/*
+ * Assessment: Project Group
+ * Course Id: CST8288 OOP with Design Patterns
+ * Section: 012
+ * Student Name: Zhiru Xie
+ * Student Id: 041143904
+ * Professor Name: Teddy Yap
+ */
+package ZhiruXie.DataAccessLayer;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+/** This class is responsible for providing the connection to the database.For safety consideration singleton pattern is applied.
+ * @author Zhiru Xie
+ * @since JDK21
+ * @version 1.0
+ * @see ZhiruXie.DataAccessLayer
+ */
+public class DataSource {
+    /** Unique instance used for accessing the database. */
+    private static Connection connection = null;
+    
+    /** Make the default constructor private to prevent other members from instantiating it. */
+    private DataSource() { }
+    
+    /** Retrieve the database connection Singleton. Re-generate one if there's no one functioning.
+     * @param username The username to access the database.
+     * @param password The password to access the database.
+    * @return The unique instance of database connection.
+    */
+    public static Connection getConnection(String username, String password) {
+        DatabaseProperty props = new DatabaseProperty(username, password);
+        try {
+            if (connection == null || connection.isClosed()) {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                connection = DriverManager.getConnection(props.getUrl(), props.getUsername().isEmpty() ? "cst8288" : props.getUsername(), props.getPassword().isEmpty() ? "cst8288" : props.getPassword());
+            } else {
+                System.out.println("Cannot create new connection, using existing one");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("Driver not found: " + e.getMessage());
+        }
+        return connection;
+    }
+}
